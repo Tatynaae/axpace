@@ -1,0 +1,35 @@
+.myProjects {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 50px;
+
+  .create {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    &_icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1px dashed #88949b;
+      padding: 6px;
+
+      > * {
+        color: #88949B;
+      }
+    }
+
+    > span {
+      color: #88949b;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.tab-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .dark-item {
+    color: #88949b;
+  }
+  .light-item {
+    color: #666a6e;
+  }
+
+  .light-item,
+  .dark-item {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .dark-underline {
+    color: #fafafa;
+  }
+
+  .light-underline {
+    color: #1e1f21;
+    text-decoration-line: underline;
+  }
+
+  .dark-underline,
+  .light-underline {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration-line: underline;
+  }
+}

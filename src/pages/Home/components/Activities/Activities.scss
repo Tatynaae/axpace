@@ -1,0 +1,53 @@
+.activities {
+  width: 100%;
+  .allActivity,
+  &_dates {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+    text-align: center;
+
+  }
+  .allActivity {
+    height: 84%;
+    .activity {
+      width: 100%;
+      height: 100%;
+      background: #2c3236;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: end;
+
+      &_number {
+        width: 100%;
+        background: #2A57C8;
+      }
+
+      > span {
+        color: #fafafa;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: -0.176px;
+      }
+    }
+  }
+  &_dates {
+    border-top: 1px solid #2c3236;
+    margin: 8px 0 0 0;
+    padding: 8px 0 0 0;
+
+    .days,
+    .total {
+      color: #88949b;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.176px;
+    }
+  }
+}
