@@ -22,10 +22,46 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      position: relative;
 
       > * {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: #88949b;
         cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          border-radius: 4px;
+          background: #2c3236;
+        }
+      }
+
+      .settingsModal {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        border-radius: 8px;
+        border: 1px solid #2c3236;
+        background: #0e1112;
+        display: flex;
+        flex-direction: column;
+
+        > span {
+          padding: 10px;
+          width: 165px;
+          transition: 0.2s;
+          color: #fafafa;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px; /* 150% */
+
+          &:hover {
+            background: #25272c;
+          }
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import ArrowDown from "../../assets/icons/ArrowDown";
 import StarredIcon from "../../assets/icons/StarredIcon";
@@ -19,7 +19,7 @@ const listOfTabs = [
   { id: 5, title: "Comments", value: "Comments" },
 ];
 
-const allTasks = [
+let allTasks = [
   {
     id: 1,
     title: "Section",
@@ -95,6 +95,8 @@ const allTasks = [
 ];
 
 const ProjectDetail = () => {
+  const [addSection, setAddSection] = useState(null);
+  const [addInput, setAddInput] = useState(false);
   const [content, setContent] = useState(listOfTabs[1].value);
   const users = [
     {
@@ -107,6 +109,34 @@ const ProjectDetail = () => {
       image: user3,
     },
   ];
+  const addInputRef = useRef(null);
+
+  const handleBlurAddInput = () => {
+    setAddInput(false);
+  };
+
+  const handleAddSection = (e) => {
+    setAddSection(e.target.value);
+  };
+  
+  const handleClickAddInput = (e) => {
+    if (e.key === "Enter" && addSection.length > 0) {
+      allTasks.push({
+        id: allTasks[allTasks.length - 1].id + 1,
+        title: addSection,
+        tasks: [],
+      });
+      setAddInput(false);
+    }
+  };
+
+  useEffect(() => {
+    if (addInputRef.current) {
+      addInputRef.current.focus();
+    }
+  }, [addInput]);
+
+  console.log(allTasks);
 
   return (
     <section className="projectDetail_container">
@@ -154,10 +184,23 @@ const ProjectDetail = () => {
         {allTasks.map((task) => (
           <Task task={task} />
         ))}
-        <div className="third_section__add">
+        {addInput ? (
+          <input
+            type="text"
+            ref={addInputRef}
+            required
+            placeholder="Placeholder_input"
+            className="third_section__addInput"
+            onChange={(e) => handleAddSection(e)}
+            onKeyDown={(e) => handleClickAddInput(e)}
+            onBlur={handleBlurAddInput}
+          />
+        ) : (
+          <div className="third_section__add" onClick={() => setAddInput(true)}>
             <PlusIcon />
             <span>Add Section</span>
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

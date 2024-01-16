@@ -156,7 +156,7 @@
       gap: 8px;
       padding: 6px 0;
       cursor: pointer;
-      transition: .2s;
+      transition: 0.2s;
 
       &:hover {
         border-radius: 12px;
@@ -166,6 +166,19 @@
       > * {
         color: #88949b;
       }
+    }
+
+    &__addInput {
+      width: 264px;
+      border-radius: 8px;
+      border: 1px solid #fafafa;
+      background: transparent;
+      padding: 12px;
+      outline: none;
+      color: #fafafa;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 500;
     }
   }
 }
