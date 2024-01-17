@@ -3,9 +3,8 @@ import PlusIcon from "../../../../assets/icons/PlusIcon";
 import ProjectTitle from "../../../../components/UI/ProjectTitle";
 import "./MyProjects.scss";
 
-export const allMyProjects = new Array(3).fill("Project Name");
 
-const MyProjects = () => {
+const MyProjects = ({allMyProjects}) => {
   return (
     <div className="myProjects">
       <div className="create">
@@ -15,7 +14,7 @@ const MyProjects = () => {
         <span>Create project</span>
       </div>
       {allMyProjects.map((el) => (
-        <ProjectTitle title={el} />
+        <ProjectTitle title={el.title} />
       ))}
     </div>
   );

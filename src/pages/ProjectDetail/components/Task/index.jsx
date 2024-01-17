@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Assign from "./components/Assign";
 import DeleteModal from "../DeleteModal";
 import Overlay from "../../../../components/Overlay";
 import PlusIcon from "../../../../assets/icons/PlusIcon";
@@ -7,10 +8,13 @@ import PointsIcon from "../../../../assets/icons/PointsIcon";
 import CommentIcon from "../../../../assets/icons/CommentIcon";
 import "./Task.scss";
 
-const Task = ({ task }) => {
+const Task = ({ task, allTasks }) => {
   const [overlay, setOverlay] = useState(false);
+  const [newTaskBlock, setNewTaskBlock] = useState(false);
+  const [newTask, setNewTask] = useState("");
   const [settingsModal, setSettingsModal] = useState(false);
 
+  const textareaRef = useRef(null);
   const toggleOverlay = () => {
     setOverlay(!overlay);
     setSettingsModal(false);
@@ -19,6 +23,44 @@ const Task = ({ task }) => {
   const toggleSettingsModal = () => {
     setSettingsModal(!settingsModal);
   };
+
+  const toggleNewTask = () => {
+    setNewTaskBlock(!newTaskBlock);
+  };
+
+  const handleTextareaBlur = () => {
+    setNewTaskBlock(false);
+  };
+
+  const handleTextareaChange = (e) => {
+    setNewTask(e.target.value);
+  };
+
+  const handleTextareaKeyDown = (e, index) => {
+    if (e.key === "Enter" && newTaskBlock === true) {
+      allTasks.map(
+        (task) =>
+          task.id === index &&
+          task.tasks.push({
+            id: task.tasks[task.tasks.length - 1].id + 1,
+            taskName: newTask,
+            date: "Oct 4-7",
+            type: "JS",
+            status: true,
+            priority: false,
+            comments: 0,
+          })
+      );
+      setNewTask("");
+      setNewTaskBlock(false);
+    }
+  };
+
+  useEffect(() => {
+    if (newTaskBlock && textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [newTaskBlock]);
 
   return (
     <>
@@ -66,7 +108,7 @@ const Task = ({ task }) => {
                 </div>
               )}
               <div className="block_second">
-                <div className="type">{el.type}</div>
+                <Assign el={el} />
                 <div className="date">{el.date}</div>
               </div>
               <div className="block_third">
@@ -74,13 +116,31 @@ const Task = ({ task }) => {
               </div>
             </div>
           ))}
-          <div className="addTask">
+
+          {newTaskBlock && (
+            <div className="newBlock block">
+              <textarea
+                placeholder="Write task name"
+                ref={textareaRef}
+                onBlur={handleTextareaBlur}
+                onChange={(e) => handleTextareaChange(e)}
+                onKeyDown={(e) => handleTextareaKeyDown(e, task.id)}
+              ></textarea>
+            </div>
+          )}
+
+          <div className="addTask" onClick={toggleNewTask}>
             <PlusIcon />
             <span>Add task </span>
           </div>
         </div>
       </div>
-      {overlay && <Overlay close={toggleOverlay} children={<DeleteModal close={toggleOverlay}/>} />}
+      {overlay && (
+        <Overlay
+          close={toggleOverlay}
+          children={<DeleteModal close={toggleOverlay} />}
+        />
+      )}
     </>
   );
 };

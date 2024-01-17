@@ -1,0 +1,127 @@
+.member {
+  width: 28px;
+  height: 28px;
+  padding: 13px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background: rgba(42, 87, 200, 0.14);
+  color: #2a57c8;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+
+  .membersModal {
+    position: absolute;
+    z-index: 3;
+    left: -16px;
+    top: 140%;
+    padding: 20px;
+    border-radius: 8px;
+    background: #0e1112;
+    box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
+
+    &_block {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .assign-arrow {
+        position: absolute;
+        top: -30px;
+      }
+
+      &_top {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        > input {
+          border-radius: 8px;
+          border: 1px solid #88949b;
+          background: #0e1112;
+          outline: none;
+          padding: 8px 12px;
+          color: #fafafa;
+          font-family: Inter;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: -0.16px;
+        }
+
+        > span {
+          color: #fff;
+          font-family: Inter;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        > button {
+          width: 100px;
+          color: #fff;
+          font-family: Inter;
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: -0.12px;
+          border-radius: 8px;
+          background: #2a57c8;
+          border: none;
+          display: flex;
+          padding: 6px 12px;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      &_bottom {
+        border-radius: 8px;
+        border: 1px solid #2c3236;
+        background: #0e1112;
+        display: flex;
+        flex-direction: column;
+
+        .list {
+          display: flex;
+          align-items: center;
+          padding: 8px 10px;
+          gap: 8px;
+          transition: 0.2s;
+
+          &:hover {
+            background: #2c3236;
+          }
+
+          > span {
+            color: #fafafa;
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: -0.16px;
+          }
+        }
+
+        .invite {
+          display: flex;
+          align-items: center;
+          padding: 8px 10px;
+          gap: 8px;
+          color: #3179d8;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: -0.16px;
+        }
+      }
+    }
+  }
+}

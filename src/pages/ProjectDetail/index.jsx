@@ -118,7 +118,7 @@ const ProjectDetail = () => {
   const handleAddSection = (e) => {
     setAddSection(e.target.value);
   };
-  
+
   const handleClickAddInput = (e) => {
     if (e.key === "Enter" && addSection.length > 0) {
       allTasks.push({
@@ -182,7 +182,7 @@ const ProjectDetail = () => {
       </div>
       <div className="third_section">
         {allTasks.map((task) => (
-          <Task task={task} />
+          <Task task={task} allTasks={allTasks} />
         ))}
         {addInput ? (
           <input
