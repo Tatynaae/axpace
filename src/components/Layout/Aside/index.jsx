@@ -69,6 +69,7 @@ const Aside = () => {
     >
       <div
         className="aside_logo"
+        onClick={() => navigate("/")}
         style={{
           color: theme === "dark" ? "#FAFAFA" : "#1E1F21",
         }}
@@ -86,10 +87,20 @@ const Aside = () => {
               )}
               onClick={() => selectNav(item.path)}
             >
-              <span className={selected === item.path && (theme === 'light' ? 'dark-selected' : 'light-selected')}>
+              <span
+                className={
+                  selected === item.path &&
+                  (theme === "light" ? "dark-selected" : "light-selected")
+                }
+              >
                 {item.icon}
               </span>
-              <span className={selected === item.path && (theme === 'light' ? 'dark-selected' : 'light-selected')}>
+              <span
+                className={
+                  selected === item.path &&
+                  (theme === "light" ? "dark-selected" : "light-selected")
+                }
+              >
                 {item.title}
               </span>
             </li>

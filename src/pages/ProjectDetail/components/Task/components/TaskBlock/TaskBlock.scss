@@ -1,0 +1,211 @@
+.block {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #2c3236;
+  background: #1e2024;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 16px;
+  transition: 0.2s;
+
+  &:hover {
+    border: 1px solid #88949b;
+  }
+
+  &_taskName {
+    width: 100%;
+    gap: 10px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fafafa;
+
+    > p {
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .rename {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fafafa;
+
+      &::selection {
+        background: #2A57C8;
+      }
+    }
+
+    .editTask {
+      display: block;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      position: relative;
+
+      &:hover {
+        background: #2c3236;
+      }
+
+      .list {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        z-index: 3;
+        left: 0;
+        top: 101%;
+        border-radius: 8px;
+        border: 1px solid #2c3236;
+        background: #0e1112;
+        box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
+
+        > span {
+          color: #fafafa;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: -0.16px;
+          width: 165px;
+          padding: 8px 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+
+          &:hover {
+            background: #25272c;
+          }
+        }
+
+        .second-list {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          z-index: 3;
+          left: 101%;
+          top: 0;
+          border-radius: 8px;
+          border: 1px solid #2c3236;
+          background: #0e1112;
+          box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
+        }
+      }
+    }
+  }
+
+  &_first {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &_left,
+    &_right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &_left {
+      > * {
+        display: flex;
+        padding: 2px 8px;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    &_right {
+      .comments,
+      .shared {
+        display: flex;
+        align-items: center;
+
+        > * {
+          color: #88949b;
+        }
+
+        > span {
+          font-family: Inter;
+          font-size: 12px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    &_left {
+      .status {
+        border-radius: 12px;
+        background: #403624;
+        color: #c5850a;
+        font-family: Inter;
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .priority {
+        color: #19893f;
+        font-family: Inter;
+        font-size: 12px;
+        font-weight: 400;
+        border-radius: 12px;
+        background: rgba(25, 137, 63, 0.14);
+      }
+    }
+  }
+
+  &_second {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .date {
+      color: #88949b;
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  &_third {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &__text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #403624;
+      color: #c5850a;
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  > textarea {
+    width: 100%;
+    background: transparent;
+    resize: none;
+    border: none;
+    outline: none;
+    color: #fafafa;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

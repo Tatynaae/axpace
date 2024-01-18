@@ -37,7 +37,7 @@ const Assign = ({ el }) => {
 
   return (
     <div className="member" onClick={(e) => openMembersModal(e)}>
-      {el.type}
+      {el.assign}
       {membersModal && (
         <div className="membersModal">
           <div className="membersModal_block">

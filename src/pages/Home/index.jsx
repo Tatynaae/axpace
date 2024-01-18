@@ -1,10 +1,10 @@
 import React from "react";
+import { useMyProjectsContext } from "../../context/MyProjectsContext";
 import Frame from "../../components/UI/Frame";
 import MyTasks from "./components/MyTasks";
 import Activities from "./components/Activities";
 import MyProjects from "./components/MyProjects";
 import "./Home.scss";
-import { useMyProjectsContext } from "../../context/MyProjectsContext";
 
 const Home = () => {
   const { projects } = useMyProjectsContext();

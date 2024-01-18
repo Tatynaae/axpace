@@ -1,24 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useMyProjectsContext } from "../../context/MyProjectsContext";
 import Frame from "../../components/UI/Frame";
 import MyTasks from "../Home/components/MyTasks";
 import ProjectTitle from "../../components/UI/ProjectTitle";
 import "./Projects.scss";
 
 const Projects = () => {
-  const allMyProjects = [
-    { id: 1, title: "Project name" },
-    { id: 2, title: "Project name" },
-    { id: 3, title: "Project name" },
-  ];
+  const { projects } = useMyProjectsContext();
 
   const navigate = useNavigate();
   return (
     <div className="projects_container">
-      {allMyProjects.map((project) => (
+      {projects.map((project) => (
         <div
           className="projects_element"
-          onClick={() => navigate(`/projects/${project.title}`)}
+          onClick={() => navigate(`/projects/${project.title}-${project.id}`)}
           key={project.id}
         >
           <Frame

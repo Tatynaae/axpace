@@ -1,0 +1,19 @@
+.addBtn {
+    width: 264px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 0;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 12px;
+
+    &:hover {
+      background: #2c3236;
+    }
+
+    > * {
+      color: #88949b;
+    }
+  }

@@ -10,12 +10,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
 
     &__left {
       color: #fafafa;
       font-family: Inter;
       font-size: 16px;
       font-weight: 500;
+      width: 80%;
+      overflow-x: scroll;
+
+      .renameSectionInput {
+        width: 100%;
+        outline: none;
+        border: none;
+        background: transparent;
+        color: #fafafa;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: 1px solid #fafafa;
+      }
     }
     &__right {
       display: flex;
@@ -41,6 +56,7 @@
         position: absolute;
         top: 100%;
         left: 50%;
+        z-index: 3;
         border-radius: 8px;
         border: 1px solid #2c3236;
         background: #0e1112;
@@ -66,138 +82,15 @@
   }
 
   &_content {
-    width: 100%;
-    height: 100vh;
-    padding: 8px;
+    width: 264px;
+    height: 100%;
+    padding: 8px 8px 80px 8px;
     border-radius: 12px;
     background: linear-gradient(180deg, #24272d 0%, #1f2125 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-
-    .block {
-      width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid #2c3236;
-      background: #1e2024;
-      display: flex;
-      flex-direction: column;
-      align-items: self-start;
-      gap: 16px;
-
-      > p {
-        color: #fafafa;
-        font-family: Inter;
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      &_first {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        &_left,
-        &_right {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        &_left {
-          > * {
-            display: flex;
-            padding: 2px 8px;
-            justify-content: center;
-            align-items: center;
-          }
-        }
-        &_right {
-          .comments,
-          .shared {
-            display: flex;
-            align-items: center;
-
-            > * {
-              color: #88949b;
-            }
-
-            > span {
-              font-family: Inter;
-              font-size: 12px;
-              font-weight: 400;
-            }
-          }
-        }
-
-        &_left {
-          .status {
-            border-radius: 12px;
-            background: #403624;
-            color: #c5850a;
-            font-family: Inter;
-            font-size: 12px;
-            font-weight: 400;
-          }
-
-          .priority {
-            color: #19893f;
-            font-family: Inter;
-            font-size: 12px;
-            font-weight: 400;
-            border-radius: 12px;
-            background: rgba(25, 137, 63, 0.14);
-          }
-        }
-      }
-
-      &_second {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        .date {
-          color: #88949b;
-          font-family: Inter;
-          font-size: 12px;
-          font-weight: 400;
-        }
-      }
-
-      &_third {
-        width: 100%;
-        display: flex;
-        align-items: center;
-
-        &__text {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 2px 8px;
-          border-radius: 12px;
-          background: #403624;
-          color: #c5850a;
-          font-family: Inter;
-          font-size: 12px;
-          font-weight: 400;
-        }
-      }
-
-      > textarea {
-        width: 100%;
-        background: transparent;
-        resize: none;
-        border: none;
-        outline: none;
-        color: #fafafa;
-        font-family: Inter;
-        font-size: 14px;
-        font-weight: 500;
-      }
-    }
 
     .addTask {
       width: 100%;

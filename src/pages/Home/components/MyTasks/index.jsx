@@ -12,13 +12,17 @@ const MyTasks = () => {
   const { projects } = useMyProjectsContext();
   const [isActive, setIsActive] = useState("Todo");
 
-  const generateTasks = (taskArray, completed = false) => {
-    return projects.map((project) => ({
-      taskName: completed
-        ? project.completed[0]?.title
-        : project.tasks[0]?.title,
-      projectName: project.title,
-    }));
+  const generateTasks = (projects, completed = false) => {
+    return projects.flatMap((project) => {
+      const taskArray = completed
+        ? project.tasks.completed
+        : project.tasks.todo;
+
+      return taskArray.map((task) => ({
+        taskName: task.title,
+        projectName: project.title,
+      }));
+    });
   };
 
   const myTasks = [

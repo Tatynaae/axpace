@@ -1,15 +1,11 @@
 import React, { useState } from "react";
+import { useMyProjectsContext } from "../../../../context/MyProjectsContext";
 import RadioIcon from "../../../../assets/icons/RadioIcon";
 import ArrowDown from "../../../../assets/icons/ArrowDown";
 import "./DeleteModal.scss";
 
-const sectionNames = [
-  { id: 1, title: "Section name-1" },
-  { id: 2, title: "Section name-2" },
-  { id: 3, title: "Section name-3" },
-];
-
-const DeleteModal = ({ close }) => {
+const DeleteModal = ({ close, onDelete, projectId, taskTitle }) => {
+  const { projects } = useMyProjectsContext();
   const [selected, setSelected] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [option, setOption] = useState(null);
@@ -35,8 +31,8 @@ const DeleteModal = ({ close }) => {
   };
 
   const handleDelete = () => {
+    onDelete(projectId, taskTitle);
     close();
-    // ........
   };
 
   return (
@@ -54,12 +50,12 @@ const DeleteModal = ({ close }) => {
           <ArrowDown />
           {openModal ? (
             <div className="sections" onClick={() => setOpenModal(!openModal)}>
-              {sectionNames.map((name) => (
+              {projects.map((project) => (
                 <span
-                  onClick={(e) => handleSetOption(e, name.title)}
-                  key={name.id}
+                  onClick={(e) => handleSetOption(e, project.title)}
+                  key={project.id}
                 >
-                  {name.title}
+                  {project.title}
                 </span>
               ))}
             </div>

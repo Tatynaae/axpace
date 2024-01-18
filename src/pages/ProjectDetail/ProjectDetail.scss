@@ -142,32 +142,16 @@
 
   .third_section {
     width: 100%;
-    height: 90%;
+    height: 100%;
     padding: 20px 40px 0 0;
     display: flex;
     align-items: self-start;
+    overflow-x: scroll;
     gap: 16px;
 
-    &__add {
+    &__addButton {
       width: 264px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 6px 0;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover {
-        border-radius: 12px;
-        background: #2c3236;
-      }
-
-      > * {
-        color: #88949b;
-      }
     }
-
     &__addInput {
       width: 264px;
       border-radius: 8px;
