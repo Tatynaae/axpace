@@ -5,6 +5,7 @@ import Task from "./components/Task";
 import Tabs from "../../components/UI/Tabs";
 import ArrowDown from "../../assets/icons/ArrowDown";
 import AddButton from "../../components/UI/AddButton";
+import ModalList from "../../components/UI/ModalList";
 import FilterIcon from "../../assets/icons/FilterIcon";
 import StarredIcon from "../../assets/icons/StarredIcon";
 import ProjectTitle from "../../components/UI/ProjectTitle";
@@ -25,6 +26,7 @@ const ProjectDetail = () => {
   const [addSection, setAddSection] = useState(null);
   const [addInput, setAddInput] = useState(false);
   const [content, setContent] = useState(listOfTabs[1].value);
+  const [projectList, setProjectList] = useState(false);
 
   const Index = parseInt(location.pathname.slice(-1), 10);
   const project = projects[Index - 1];
@@ -88,7 +90,7 @@ const ProjectDetail = () => {
         });
       });
       setAddInput(false);
-      setAddSection(""); // Clear addSection after adding a new section
+      setAddSection("");
     }
   };
 
@@ -143,21 +145,38 @@ const ProjectDetail = () => {
     });
   };
 
+  const toggleProjectList = () => {
+    setProjectList(!projectList);
+  };
+
   useEffect(() => {
     if (addInputRef.current) {
       addInputRef.current.focus();
     }
   }, [addInput]);
 
+  const listOfProjects = [
+    "Project details",
+    "Dublicate",
+    "Copy project link",
+    "Archive",
+    "Create project",
+    "Leave the project",
+  ];
   return (
     <section className="projectDetail_container">
       <div className="first_section">
         <div className="first_section__left">
-          <ProjectTitle title={project.title} />
+          <ProjectTitle title={project.title} onClick={toggleProjectList} />
           <div className="icons">
             <ArrowDown />
             <StarredIcon />
           </div>
+          {projectList && (
+            <div className="list-of-projects">
+              <ModalList list={listOfProjects} />
+            </div>
+          )}
         </div>
         <div className="first_section__right">
           <div className="users">

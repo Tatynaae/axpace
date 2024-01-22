@@ -127,7 +127,7 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
         </div>
         <div className="task_content">
           {Array.isArray(task.tasks) &&
-            task.tasks.map((el) => <TaskBlock el={el} key={el.id} />)}
+            task.tasks.map((el) => <TaskBlock el={el} key={el.id} project={project}/>)}
 
           {newTaskBlock && (
             <div className="newBlock block">

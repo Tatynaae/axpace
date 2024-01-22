@@ -3,7 +3,7 @@ import { useThemeContext } from "../../../context/ThemeContext";
 import "./ProjectTitle.scss";
 import { useNavigate } from "react-router-dom";
 
-const ProjectTitle = ({ title, path }) => {
+const ProjectTitle = ({ title, path, ...props }) => {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
 
@@ -12,7 +12,7 @@ const ProjectTitle = ({ title, path }) => {
   };
 
   return (
-    <div className="project-title" onClick={handleNavigate}>
+    <div className="project-title" onClick={handleNavigate} {...props}>
       <div className="project-title_icon">N</div>
       <span className={theme === "dark" ? "darkTitle" : "lightTitle"}>
         {title}

@@ -1,0 +1,225 @@
+.task-detail {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 592px;
+  height: 100%;
+  border-left: 1px solid #2c3236;
+  background: #1e2024;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+
+
+  &_top {
+    padding: 12px 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #2c3236;
+    background: #1e2024;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &_left,
+    &_right {
+      display: flex;
+      align-items: center;
+      color: #88949b;
+    }
+    &_left {
+      gap: 8px;
+    }
+
+    &_right {
+      gap: 24px;
+
+      > * {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &_content {
+    padding: 60px 24px 12px 24px;
+
+    .bread-crumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      > span {
+        color: #88949b;
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .task-name {
+      color: #fafafa;
+      font-family: Inter;
+      font-size: 32px;
+      font-weight: 400;
+      margin: 15px 0;
+    }
+
+    .about-task {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 16px;
+
+      &_info {
+        display: flex;
+
+        &_left {
+          width: 120px;
+          color: #88949b;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+        }
+
+        &_right {
+          color: #fafafa;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: -0.16px;
+        }
+
+        &_Right {
+          color: #88949b;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: -0.16px;
+        }
+      }
+    }
+
+    .description {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid #2c3236;
+      background: transparent;
+      padding: 12px;
+      resize: none;
+      margin: 24px 0;
+      height: 60px;
+      outline: none;
+      color: #ffffff;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    .subtask {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      > input {
+        width: 100%;
+        background: transparent;
+        outline: none;
+        padding: 8px 12px;
+        border: none;
+        color: #fafafa;
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.14px;
+        border-radius: 8px;
+        border: 1px solid var(--white, #fafafa);
+      }
+
+      > span {
+        color: #88949b;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      > button {
+        border-radius: 8px;
+        border: 1px solid #2c3236;
+        background: transparent;
+        width: 130px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        color: #88949b;
+        padding: 6px 0;
+
+        > span {
+          color: #fafafa;
+          font-family: Inter;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: -0.14px;
+        }
+      }
+
+      .subtask-title {
+        border-radius: 8px;
+        border: 1px solid #2c3236;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 10px;
+        cursor: pointer;
+
+        &_left,
+        &_right {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #88949b;
+
+          > span {
+            color: #fafafa;
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: -0.16px;
+          }
+        }
+      }
+    }
+  }
+  .comment {
+    background: #25272c;
+    width: 100%;
+    padding: 16px 24px;
+
+    > textarea {
+      width: 544px;
+      resize: none;
+      background: transparent;
+      border-radius: 8px;
+      border: 1px solid #2c3236;
+      padding: 8px 12px;
+      outline: none;
+      color: #ffffff;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+}

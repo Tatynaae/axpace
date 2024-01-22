@@ -15,7 +15,15 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      position: relative;
 
+      .list-of-projects {
+        width: 165px;
+        position: absolute;
+        left: 73%;
+        top: 100%;
+        z-index: 2;
+      }
       .icons {
         color: #88949b;
         display: flex;

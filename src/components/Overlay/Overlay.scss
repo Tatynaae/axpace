@@ -35,5 +35,13 @@
       @include base;
       z-index: 6;
     }
+
+    .child-full {
+      width: 100%;
+      height: 100%;
+      @include base;
+      z-index: 6;
+      position: relative;
+    }
   }
 }

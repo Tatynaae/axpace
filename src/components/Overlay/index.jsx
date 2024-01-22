@@ -2,11 +2,12 @@ import React from "react";
 import { useThemeContext } from "../../context/ThemeContext";
 import "./Overlay.scss";
 
-const Overlay = ({ children, close }) => {
+const Overlay = ({ children, close, full }) => {
   const { theme } = useThemeContext();
 
   const handleClick = (e) => {
     e.stopPropagation();
+    full && close();
   };
 
   return (
@@ -19,7 +20,10 @@ const Overlay = ({ children, close }) => {
         }
         onClick={close}
       >
-        <div className="child" onClick={(e) => handleClick(e)}>
+        <div
+          className={full ? "child-full" : "child"}
+          onClick={(e) => handleClick(e)}
+        >
           {children}
         </div>
       </div>
