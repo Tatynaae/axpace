@@ -28,7 +28,7 @@ const TaskDetail = ({ task, project, taskStage }) => {
   };
 
   const handleAddSubTask = (taskId) => {
-    console.log('test', taskId);
+    console.log("test", taskId);
     const newSubTask = { title: subTaskTitle };
     setProjects((prevProject) => {
       return prevProject?.map((item) => {
@@ -65,7 +65,7 @@ const TaskDetail = ({ task, project, taskStage }) => {
 
   const handleKeyDownSubTask = (e) => {
     if (e.key === "Enter") {
-      handleAddSubTask();
+      handleAddSubTask(task?.id);
     }
   };
 
@@ -138,7 +138,7 @@ const TaskDetail = ({ task, project, taskStage }) => {
           <span>Subtask</span>
 
           {task.subtasks.map((subTask) => (
-            <div className="subtask-title">
+            <div className="subtask-title" key={subTask.id}>
               <div className="subtask-title_left">
                 <DoublePointsIcon /> <span>{subTask.title}</span>
               </div>

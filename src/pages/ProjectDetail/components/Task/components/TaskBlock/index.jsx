@@ -1,21 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import Assign from "../Assign";
+import TaskDetail from "./TaskDetail";
 import Overlay from "../../../../../../components/Overlay";
 import PointsIcon from "../../../../../../assets/icons/PointsIcon";
 import SharedIcon from "../../../../../../assets/icons/SharedIcon";
 import CommentIcon from "../../../../../../assets/icons/CommentIcon";
 import MoveRightArrowIcon from "../../../../../../assets/icons/MoveRightArrowIcon";
 import "./TaskBlock.scss";
-import TaskDetail from "./TaskDetail";
 
-const TaskBlock = ({ el, project }) => {
+const TaskBlock = ({ task, project, sections, onDelete }) => {
   const [edit, setEdit] = useState(false);
   const [move, setMove] = useState(false);
   const [rename, setRename] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [newTaskName, setNewTaskName] = useState("");
   const [overlay, setOverlay] = useState(false);
-
   const renameInputRef = useRef(null);
 
   const toggleEditModal = (e) => {
@@ -42,7 +41,7 @@ const TaskBlock = ({ el, project }) => {
 
   const handleRenameKeyDown = (e) => {
     if (e.key === "Enter") {
-      el.title = newTaskName;
+      task.title = newTaskName;
       setRename(false);
       setEditModal(false);
     }
@@ -78,13 +77,13 @@ const TaskBlock = ({ el, project }) => {
               type="text"
               ref={renameInputRef}
               className="rename"
-              defaultValue={el.title}
+              defaultValue={task.title}
               onBlur={() => setRename(false)}
               onChange={handleRenameChange}
               onKeyDown={handleRenameKeyDown}
             />
           ) : (
-            <p>{el.title}</p>
+            <p>{task.title}</p>
           )}
           {edit && (
             <div className="editTask" onClick={(e) => toggleEditModal(e)}>
@@ -92,19 +91,19 @@ const TaskBlock = ({ el, project }) => {
               {editModal && (
                 <div className="list">
                   <span onClick={openRename}>Rename</span>
-                  <span>Delete task</span>
+                  <span onClick={() => onDelete(task.id)}>Delete task</span>
                   <span>Copy link</span>
                   <span
                     onMouseOver={() => setMove(true)}
-                    onMouseLeave={() => setMove(false)}
+                    // onMouseLeave={() => setMove(false)}
                   >
                     Move
                     <MoveRightArrowIcon />
                     {move && (
                       <div className="list second-list">
-                        <span>Section name</span>
-                        <span>Section name</span>
-                        <span>Section name</span>
+                        {sections.map((section) => (
+                          <span key={section.id}>{section.sectionTitle}</span>
+                        ))}
                       </div>
                     )}
                   </span>
@@ -113,16 +112,18 @@ const TaskBlock = ({ el, project }) => {
             </div>
           )}
         </div>
-        {(el.status || el.priority) && (
+        {(task.status || task.priority) && (
           <div className="block_first">
             <div className="block_first_left">
-              {el.status && <div className="status">Status</div>}
-              {el.priority && <div className="priority">Priority</div>}
+              {task.status ? <div className="status">{task.status}</div> : null}
+              {task.priority ? (
+                <div className="priority">{task.priority}</div>
+              ) : null}
             </div>
             <div className="block_first_right">
-              {el.comments !== 0 && (
+              {task.comments !== 0 && (
                 <div className="comments">
-                  <span>{el.comments.length}</span>
+                  <span>{task.comments.length}</span>
                   <CommentIcon />
                 </div>
               )}
@@ -134,8 +135,8 @@ const TaskBlock = ({ el, project }) => {
           </div>
         )}
         <div className="block_second">
-          <Assign el={el} />
-          <div className="date">{el.date}</div>
+          <Assign project={project}/>
+          <div className="date">{task.date}</div>
         </div>
         <div className="block_third">
           <div className="block_third__text">GS-17</div>
@@ -144,9 +145,9 @@ const TaskBlock = ({ el, project }) => {
       {overlay ? (
         <Overlay full={true} close={closeOverlay}>
           <TaskDetail
-            task={el}
+            task={task}
             project={project}
-            taskStage={el.status.toLowerCase()}
+            taskStage={task.status.toLowerCase()}
           />
         </Overlay>
       ) : null}

@@ -4,16 +4,10 @@ import MemberIcon from "../../../../../../assets/icons/MemberIcon";
 import AssignArrowIcon from "../../../../../../assets/icons/AssignArrowIcon";
 import "./Assign.scss";
 
-const Assign = ({ el }) => {
+const Assign = ({ el, project }) => {
   const [membersModal, setMembersModal] = useState(false);
   const [searchMember, setSearchMember] = useState("");
   const searchMemberRef = useRef();
-
-  const members = [
-    "Sultanbekova Janylai",
-    "Sultanbekova Janylai",
-    "Sultanbekova Janylai",
-  ];
 
   const handleChangeSearchMember = (e) => {
     e.stopPropagation();
@@ -37,7 +31,7 @@ const Assign = ({ el }) => {
 
   return (
     <div className="member" onClick={(e) => openMembersModal(e)}>
-      {el.assign}
+      JS
       {membersModal && (
         <div className="membersModal">
           <div className="membersModal_block">
@@ -53,13 +47,16 @@ const Assign = ({ el }) => {
                 onBlur={handleBlurSeach}
               />
               <span>or</span>
-              <button>Assign to me</button>
+              <button className="success-btn">Assign to me</button>
             </div>
             <div className="membersModal_block_bottom">
-              {members.map((el) => (
-                <div className="list">
+              {project.members.map((member) => (
+                <div
+                  className="list"
+                  key={member.id}
+                >
                   <MemberIcon />
-                  <span>{el}</span>
+                  <span>{member.name}</span>
                 </div>
               ))}
               <div className="invite">

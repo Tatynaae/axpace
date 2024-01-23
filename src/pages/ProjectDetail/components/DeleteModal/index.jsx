@@ -4,7 +4,7 @@ import RadioIcon from "../../../../assets/icons/RadioIcon";
 import ArrowDown from "../../../../assets/icons/ArrowDown";
 import "./DeleteModal.scss";
 
-const DeleteModal = ({ close, onDelete, projectId, taskTitle }) => {
+const DeleteModal = ({ close, onDelete}) => {
   const { projects } = useMyProjectsContext();
   const [selected, setSelected] = useState(1);
   const [openModal, setOpenModal] = useState(false);
@@ -31,7 +31,7 @@ const DeleteModal = ({ close, onDelete, projectId, taskTitle }) => {
   };
 
   const handleDelete = () => {
-    onDelete(projectId, taskTitle);
+    onDelete();
     close();
   };
 
@@ -63,10 +63,10 @@ const DeleteModal = ({ close, onDelete, projectId, taskTitle }) => {
         </div>
       </div>
       <div className="deleteModal_btns">
-        <button className="cencel" onClick={handleCencel}>
+        <button className="cencel-btn" onClick={handleCencel}>
           Cancel
         </button>
-        <button className="delete" onClick={handleDelete}>
+        <button className="success-btn" onClick={handleDelete}>
           Delete section
         </button>
       </div>

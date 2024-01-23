@@ -1,0 +1,14 @@
+.starred-projects_container {
+    width: 100%;
+    height: 100%;
+    padding: 90px 40px 100px 0;
+    gap: 20px;
+    display: flex;
+    align-items: self-start;
+    flex-wrap: wrap;
+  
+    .projects_element {
+      width: 542px;
+    }
+  }
+  

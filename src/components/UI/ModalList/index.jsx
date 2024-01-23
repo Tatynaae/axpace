@@ -4,8 +4,8 @@ import "./ModalList.scss";
 const ModalList = ({ list }) => {
   return (
     <div className="list_container">
-      {list.map((el) => (
-        <div className="list_el">{el}</div>
+      {list.map((el, idx) => (
+        <div className="list_el" key={idx} onClick={el.function}>{el.title}</div>
       ))}
     </div>
   );

@@ -81,6 +81,7 @@ const Aside = () => {
         <ul className="nav_list">
           {list.map((item) => (
             <li
+              key={item}
               className={clsx(
                 selected === item.path &&
                   (theme === "dark" ? "dark-selectedLi" : "light-selectedLi")

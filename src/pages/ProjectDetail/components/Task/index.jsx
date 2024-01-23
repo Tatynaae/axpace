@@ -6,7 +6,15 @@ import PlusIcon from "../../../../assets/icons/PlusIcon";
 import PointsIcon from "../../../../assets/icons/PointsIcon";
 import "./Task.scss";
 
-const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
+const Task = ({
+  section,
+  sections,
+  project,
+  onAddTask,
+  onDeleteTask,
+  onDeleteSection,
+  onRenameSection,
+}) => {
   const [newTask, setNewTask] = useState("");
   const [overlay, setOverlay] = useState(false);
   const [newTaskBlock, setNewTaskBlock] = useState(false);
@@ -38,8 +46,11 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
 
   const handleTextareaKeyDown = (e) => {
     if (e.key === "Enter" && newTaskBlock === true) {
-      setNewTask("");
-      setNewTaskBlock(false);
+      if (newTask.trim() !== "") {
+        onAddTask(newTask, section);
+        setNewTask("");
+        setNewTaskBlock(false);
+      }
     }
   };
 
@@ -55,12 +66,12 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
 
   useEffect(() => {
     if (renameSection) {
-      const inputElement = document.getElementById(`renameInput-${task.id}`);
+      const inputElement = document.getElementById(`renameInput-${section.id}`);
       if (inputElement) {
         inputElement.focus();
       }
     }
-  }, [renameSection, task.id]);
+  }, [renameSection, section.id]);
 
   const handleRenameSectionClick = () => {
     setRenameSection(true);
@@ -74,18 +85,24 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
   const handleRenameInputBlur = () => {
     const trimmedNewSectionName = newSectionName.trim();
     if (trimmedNewSectionName !== "") {
-      onRenameSection(task.id, task.title, trimmedNewSectionName);
+      onRenameSection(section.id, trimmedNewSectionName);
       setRenameSection(false);
     } else {
-      setNewSectionName(task.title);
+      setNewSectionName(section.title);
       setRenameSection(false);
     }
   };
 
   const handleRenameInputKeyDown = (e) => {
     if (e.key === "Enter") {
-      onRenameSection(task.id, task.title, newSectionName);
-      setRenameSection(false);
+      const trimmedNewSectionName = newSectionName.trim();
+      if (trimmedNewSectionName !== "") {
+        onRenameSection(section.id, trimmedNewSectionName);
+        setRenameSection(false);
+      } else {
+        setNewSectionName(section.title);
+        setRenameSection(false);
+      }
     }
   };
 
@@ -97,16 +114,17 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
             <div className="task_head__left">
               <input
                 type="text"
-                id={`renameInput-${task.id}`}
+                id={`renameInput-${section?.id}`}
                 className="renameSectionInput"
-                value={newSectionName || task.title}
+                defaultValue={section.sectionTitle}
+                value={newSectionName || section.sectionTitle}
                 onChange={handleRenameInputChange}
                 onBlur={handleRenameInputBlur}
                 onKeyDown={handleRenameInputKeyDown}
               />
             </div>
           ) : (
-            <div className="task_head__left">{task.title}</div>
+            <div className="task_head__left">{section.sectionTitle}</div>
           )}
 
           <div className="task_head__right">
@@ -126,8 +144,15 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
           </div>
         </div>
         <div className="task_content">
-          {Array.isArray(task.tasks) &&
-            task.tasks.map((el) => <TaskBlock el={el} key={el.id} project={project}/>)}
+          {section.tasks.map((el) => (
+            <TaskBlock
+              task={el}
+              key={el.id}
+              project={project}
+              sections={sections}
+              onDelete={onDeleteTask}
+            />
+          ))}
 
           {newTaskBlock && (
             <div className="newBlock block">
@@ -148,17 +173,12 @@ const Task = ({ task, project, onDeleteSection, onRenameSection }) => {
         </div>
       </div>
       {overlay && (
-        <Overlay
-          close={toggleOverlay}
-          children={
-            <DeleteModal
-              close={toggleOverlay}
-              onDelete={onDeleteSection}
-              projectId={project.id}
-              taskTitle={task.title}
-            />
-          }
-        />
+        <Overlay close={toggleOverlay}>
+          <DeleteModal
+            close={toggleOverlay}
+            onDelete={() => onDeleteSection(section.id)}
+          />
+        </Overlay>
       )}
     </>
   );

@@ -8,11 +8,12 @@ import "./Projects.scss";
 
 const Projects = () => {
   const { projects } = useMyProjectsContext();
+  const nonArchivedProjects = projects.filter((project) => !project.archived);
 
   const navigate = useNavigate();
   return (
     <div className="projects_container">
-      {projects.map((project) => (
+      {nonArchivedProjects.map((project) => (
         <div
           className="projects_element"
           onClick={() => navigate(`/projects/${project.title}-${project.id}`)}

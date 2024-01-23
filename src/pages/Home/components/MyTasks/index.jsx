@@ -9,32 +9,19 @@ import "./MyTasks.scss";
 
 const MyTasks = () => {
   const { theme } = useThemeContext();
-  const { projects } = useMyProjectsContext();
+  const { getTasks } = useMyProjectsContext();
   const [isActive, setIsActive] = useState("Todo");
-
-  const generateTasks = (projects, completed = false) => {
-    return projects.flatMap((project) => {
-      const taskArray = completed
-        ? project.tasks.completed
-        : project.tasks.todo;
-
-      return taskArray.map((task) => ({
-        taskName: task.title,
-        projectName: project.title,
-      }));
-    });
-  };
 
   const myTasks = [
     {
       title: "Todo",
       value: "Todo",
-      tasks: generateTasks(projects),
+      tasks: getTasks("todo"),
     },
     {
       title: "Completed",
       value: "Completed",
-      tasks: generateTasks(projects, true),
+      tasks: getTasks("completed"),
     },
   ];
 
@@ -54,32 +41,36 @@ const MyTasks = () => {
         {isActive &&
           myTasks
             .find((task) => task.value === isActive)
-            ?.tasks.map((el) => (
-              <div
-                className={clsx(
-                  "task-gen",
-                  theme === "dark" ? "dark-task" : "light-task"
-                )}
-                key={el.projectName}
-              >
-                <div className="task-gen_left">
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: theme === "light" ? "#666A6E" : "#88949B",
-                    }}
-                  >
-                    <TodoIcon />
+            ?.tasks?.map((el) => {
+              return el.tasks.map((task) => (
+                <div
+                  className={clsx(
+                    "task-gen",
+                    theme === "dark" ? "dark-task" : "light-task"
+                  )}
+                  key={el.projectName}
+                >
+                  <div className="task-gen_left">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: theme === "light" ? "#666A6E" : "#88949B",
+                      }}
+                    >
+                      <TodoIcon />
+                    </div>
+                    <span
+                      className={theme === "dark" ? "darkName" : "lightName"}
+                    >
+                      {task.title}
+                    </span>
                   </div>
-                  <span className={theme === "dark" ? "darkName" : "lightName"}>
-                    {el.taskName}
-                  </span>
+                  <div className="project-name">{el.title}</div>
                 </div>
-                <div className="project-name">{el.projectName}</div>
-              </div>
-            ))}
+              ));
+            })}
       </div>
       <Link to={"#"} className="show">
         Show more
