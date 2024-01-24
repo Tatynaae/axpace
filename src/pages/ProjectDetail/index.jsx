@@ -5,6 +5,7 @@ import Task from "./components/Task";
 import Tabs from "../../components/UI/Tabs";
 import Overlay from "../../components/Overlay";
 import ArrowDown from "../../assets/icons/ArrowDown";
+import InviteMember from "./components/InviteMember";
 import AddButton from "../../components/UI/AddButton";
 import ModalList from "../../components/UI/ModalList";
 import FilterIcon from "../../assets/icons/FilterIcon";
@@ -36,6 +37,7 @@ const ProjectDetail = () => {
   const Index = parseInt(location.pathname.slice(-1), 10);
   const project = projects[Index - 1];
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getTasks = (projectId, status) => {
     if (project.id === projectId) {
       return project.tasks.filter((el) => el.status === status);
@@ -154,13 +156,17 @@ const ProjectDetail = () => {
   }, [addInput]);
 
   useEffect(() => {
-    setSections((prevSections) =>
-      prevSections.map((section) => ({
+    setSections((prevSections) => {
+      return prevSections.map((section) => ({
         ...section,
         tasks: getTasks(project.id, section.sectionTitle.toLowerCase()),
-      }))
-    );
+      }));
+    });
   }, [projects, project.id]);
+
+  
+  
+  
 
   const handleArchiveProject = () => {
     archiveProject(project.id);
@@ -215,7 +221,7 @@ const ProjectDetail = () => {
                 +{project.members.length - 3}
               </div>
             </div>
-            <button className="shareBtn">Share</button>
+            <InviteMember project={project}/>
           </div>
           <div className="line"></div>
         </div>
@@ -270,7 +276,7 @@ const ProjectDetail = () => {
       </section>
 
       {overlay ? (
-        <Overlay>
+        <Overlay close={toggleOverlay}>
           <CreateProject close={toggleOverlay} />
         </Overlay>
       ) : null}

@@ -1,0 +1,59 @@
+.card-container {
+  border-radius: 16px;
+  border: 1px solid #2c3236;
+  background: #25272c;
+  width: 264px;
+  height: 139px;
+  flex-shrink: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+
+  .card-title {
+    color: #fafafa;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .card-time {
+    color: #fafafa;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 400;
+
+    > span {
+      color: #88949b;
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+
+  .card-compare {
+    display: flex;
+    align-items: center;
+    color: #88949b;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+
+    .green-icon {
+      color: #19893f;
+    }
+    .red-icon {
+      color: #cc3e4e;
+      transform: rotate(180deg);
+    }
+  }
+
+  .card-image {
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+  }
+}

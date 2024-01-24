@@ -58,6 +58,7 @@ const Aside = () => {
   const selectNav = (item) => {
     setSelected(item);
     navigate(item);
+    window.scroll(0,0)
   };
 
   return (
@@ -81,7 +82,7 @@ const Aside = () => {
         <ul className="nav_list">
           {list.map((item) => (
             <li
-              key={item}
+              key={item.path}
               className={clsx(
                 selected === item.path &&
                   (theme === "dark" ? "dark-selectedLi" : "light-selectedLi")

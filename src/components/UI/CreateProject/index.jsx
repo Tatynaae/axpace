@@ -14,6 +14,7 @@ const CreateProject = ({ close }) => {
       inputRef.current.focus();
     }
   }, []);
+  
   const handleChangeTitleOfProject = (e) => {
     setNewProjectTitle(e.target.value);
   };

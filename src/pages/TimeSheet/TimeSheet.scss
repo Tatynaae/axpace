@@ -1,0 +1,131 @@
+.time-sheet {
+  width: 100%;
+  height: 100%;
+  padding: 52px 40px 100px 0;
+
+  &_container {
+    padding: 40px 0;
+  }
+
+  &_top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &_month {
+    margin: 40px 0 22px 0;
+    display: flex;
+    align-items: center;
+
+    > span {
+      padding: 0;
+      margin: 0;
+    }
+    .month-t {
+      color: #fafafa;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .right-a {
+      > * {
+        transform: rotate(180deg);
+      }
+    }
+    .right-a,
+    .left-a {
+      cursor: pointer;
+    }
+  }
+
+  &_week {
+    width: 100%;
+    border-top: 1px solid #2c3236;
+
+    .row {
+      width: 100%;
+      border-bottom: 1px solid #2c3236;
+      display: flex;
+      align-items: center;
+
+      &_col {
+        width: 184px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 16px 0 16px 50px;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -0.176px;
+
+        .edit {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.edit-timesheet {
+  border-radius: 12px;
+  border: 1px solid #2c3236;
+  background: #0e1112;
+  box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 24px;
+  width: 410px;
+
+  > * {
+    width: 100%;
+  }
+
+  &_first {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .close {
+      cursor: pointer;
+    }
+  }
+
+  &_second {
+    > span {
+      color: #88949b;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+
+  &_third {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    > * {
+      width: 49%;
+
+      > span {
+        color: #88949b;
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+  }
+
+  &_fours {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 24px;
+  }
+}

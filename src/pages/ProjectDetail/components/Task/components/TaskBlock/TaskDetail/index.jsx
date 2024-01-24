@@ -39,42 +39,34 @@ const TaskDetail = ({ task, project, taskStage, close }) => {
     setSubTask(!subTask);
   };
 
-  const handleAddSubTask = () => {
+  const handleAddSubTask = (projectId, taskId) => {
     const newSubTask = { id: task.subtasks.length + 1, title: subTaskTitle };
-
-    setProjects((prevProjects) => {
-      return prevProjects.map((item) => {
-        const matchingTaskIndex = item.tasks.findIndex(
-          (task) => task.id === project?.id && task.status === taskStage
-        );
-
-        if (matchingTaskIndex !== -1) {
-          const matchingTask = item.tasks[matchingTaskIndex];
-
-          const updatedSubtasks = matchingTask.subtasks.concat(newSubTask);
-
-          const updatedTasks = item.tasks.map((task, index) => {
-            if (index === matchingTaskIndex) {
+  
+    setProjects((prevProjects) =>
+      prevProjects.map((project) => {
+        if (project.id === projectId) {
+          const updatedTasks = project.tasks.map((task) => {
+            if (task.id === taskId) {
+              const updatedSubtasks = task.subtasks.concat(newSubTask);
               return { ...task, subtasks: updatedSubtasks };
-            } else {
-              return task;
             }
+            return task;
           });
-
-          return { ...item, tasks: updatedTasks };
+  
+          return { ...project, tasks: updatedTasks };
         }
-
-        return item;
-      });
-    });
-
+        return project;
+      })
+    );
+  
     setSubTask(false);
     setSubTaskTitle("");
   };
+  
 
   const createTask = () => {
     if (subTaskTitle.trim().length > 0) {
-      handleAddSubTask();
+      handleAddSubTask(project.id, task.id);
     } else {
       toggleSubTask();
     }
@@ -82,7 +74,7 @@ const TaskDetail = ({ task, project, taskStage, close }) => {
 
   const handleKeyDownSubTask = (e) => {
     if (e.key === "Enter") {
-      handleAddSubTask(task?.id);
+      handleAddSubTask(project.id, task.id);
     }
   };
 
