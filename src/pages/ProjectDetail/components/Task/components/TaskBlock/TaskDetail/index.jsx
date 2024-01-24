@@ -1,19 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useMyProjectsContext } from "../../../../../../../context/MyProjectsContext";
+import clsx from "clsx";
 import PlusIcon from "../../../../../../../assets/icons/PlusIcon";
 import MinusIcon from "../../../../../../../assets/icons/MinusIcon";
+import SmileIcon from "../../../../../../../assets/icons/SmileIcon";
 import AttachIcon from "../../../../../../../assets/icons/AttachIcon";
+import MemberIcon from "../../../../../../../assets/icons/MemberIcon";
 import ForwardIcon from "../../../../../../../assets/icons/ForwardIcon";
+import AtSymbolIcon from "../../../../../../../assets/icons/AtSymbolIcon";
 import AppointedIcon from "../../../../../../../assets/icons/AppointedIcon";
+import TimesheetsIcon from "../../../../../../../assets/icons/TimesheetsIcon";
+import TypographyIcon from "../../../../../../../assets/icons/TypographyIcon";
 import ArrowRightIcon from "../../../../../../../assets/icons/ArrowRightIcon";
 import DoublePointsIcon from "../../../../../../../assets/icons/DoublePointsIcon";
-import { useMyProjectsContext } from "../../../../../../../context/MyProjectsContext";
 import "./TaskDetail.scss";
 
-const TaskDetail = ({ task, project, taskStage }) => {
-  const { setProjects } = useMyProjectsContext();
+const TaskDetail = ({ task, project, taskStage, close }) => {
+  const subtaskRef = useRef();
+  const { setProjects, addCommentToTask } = useMyProjectsContext();
   const [subTask, setSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
-  const subtaskRef = useRef();
+  const [statusModal, setStatusModal] = useState(false);
+  const [priorityModal, setPriorityModal] = useState(false);
+  const [statusContent, setStatusContent] = useState(<MinusIcon />);
+  const [priorityContent, setPriorityContent] = useState(<MinusIcon />);
+  const [addComment, setAddComment] = useState(false);
+  const [commentText, setCommentText] = useState("");
 
   const handleClickTaskDetail = (e) => {
     e.stopPropagation();
@@ -27,27 +39,32 @@ const TaskDetail = ({ task, project, taskStage }) => {
     setSubTask(!subTask);
   };
 
-  const handleAddSubTask = (taskId) => {
-    console.log("test", taskId);
-    const newSubTask = { title: subTaskTitle };
-    setProjects((prevProject) => {
-      return prevProject?.map((item) => {
-        if (item?.id === project?.id) {
-          let s = item?.tasks[taskStage]?.map((t) => {
-            if (t?.id === taskId) {
-              t.subtasks = [...t.subtasks, newSubTask];
+  const handleAddSubTask = () => {
+    const newSubTask = { id: task.subtasks.length + 1, title: subTaskTitle };
+
+    setProjects((prevProjects) => {
+      return prevProjects.map((item) => {
+        const matchingTaskIndex = item.tasks.findIndex(
+          (task) => task.id === project?.id && task.status === taskStage
+        );
+
+        if (matchingTaskIndex !== -1) {
+          const matchingTask = item.tasks[matchingTaskIndex];
+
+          const updatedSubtasks = matchingTask.subtasks.concat(newSubTask);
+
+          const updatedTasks = item.tasks.map((task, index) => {
+            if (index === matchingTaskIndex) {
+              return { ...task, subtasks: updatedSubtasks };
+            } else {
+              return task;
             }
-            return t;
           });
 
-          return {
-            ...item,
-            tasks: {
-              ...item.tasks,
-              [taskStage]: s,
-            },
-          };
+          return { ...item, tasks: updatedTasks };
         }
+
+        return item;
       });
     });
 
@@ -56,10 +73,10 @@ const TaskDetail = ({ task, project, taskStage }) => {
   };
 
   const createTask = () => {
-    if (subTaskTitle.trim().length === 0) {
-      toggleSubTask();
+    if (subTaskTitle.trim().length > 0) {
+      handleAddSubTask();
     } else {
-      handleAddSubTask(task?.id);
+      toggleSubTask();
     }
   };
 
@@ -75,6 +92,50 @@ const TaskDetail = ({ task, project, taskStage }) => {
     }
   }, [subTask]);
 
+  const priorityList = [
+    { title: "Low" },
+    { title: "Medium" },
+    { title: "High" },
+  ];
+
+  const statusList = [
+    { title: "todo" },
+    { title: "doing" },
+    { title: "completed" },
+  ];
+
+  const togglePriorityModal = () => {
+    setPriorityModal(!priorityModal);
+  };
+  const setPriority = (content) => {
+    setPriorityContent((prevContent) => content);
+  };
+  const toggleStatusModal = () => {
+    setStatusModal(!statusModal);
+  };
+  const setStatus = (content) => {
+    setStatusContent((prevContent) => content);
+  };
+
+  const handleFocusAddComment = () => {
+    setAddComment(true);
+  };
+
+  const handleChangeAddComment = (e) => {
+    setCommentText(e.target.value);
+  };
+
+  const handleAddComment = (e) => {
+    e.stopPropagation();
+    if (commentText.trim().length > 0) {
+      addCommentToTask(project.id, task.id, {
+        id: task.comments.length + 1,
+        text: commentText,
+      });
+      setCommentText("");
+    }
+  };
+
   return (
     <div className="task-detail" onClick={handleClickTaskDetail}>
       <div className="task-detail_top">
@@ -86,7 +147,7 @@ const TaskDetail = ({ task, project, taskStage }) => {
           <div>
             <AttachIcon />
           </div>
-          <div>
+          <div onClick={close}>
             <ForwardIcon />
           </div>
         </div>
@@ -112,22 +173,60 @@ const TaskDetail = ({ task, project, taskStage }) => {
           </div>
           <div className="about-task_info">
             <div className="about-task_info_left">Assignee</div>
-            <div className="about-task_info_Right">No assignee</div>
+            <div className="about-task_info_Right">
+              <span>
+                <MemberIcon />
+              </span>
+              <span>No assignee</span>
+            </div>
           </div>
           <div className="about-task_info">
             <div className="about-task_info_left">Due date</div>
-            <div className="about-task_info_Right">No due date</div>
+            <div className="about-task_info_Right">
+              <span>
+                <TimesheetsIcon />
+              </span>
+              <span>No due date</span>
+            </div>
           </div>
           <div className="about-task_info">
             <div className="about-task_info_left">Priority</div>
-            <div className="about-task_info_Right">
-              <MinusIcon />
+            <div
+              className={`about-task_info_Right`}
+              onClick={togglePriorityModal}
+            >
+              {priorityContent}
+              {priorityModal ? (
+                <div className="modal" onMouseLeave={togglePriorityModal}>
+                  {priorityList.map((el, idx) => (
+                    <div className="modal_elem" key={idx}>
+                      <span
+                        className={el.title.toLowerCase()}
+                        onClick={() => setPriority(el.title)}
+                      >
+                        {el.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="about-task_info">
             <div className="about-task_info_left">Status</div>
-            <div className="about-task_info_Right">
-              <MinusIcon />
+            <div className="about-task_info_Right" onClick={toggleStatusModal}>
+              {statusContent}
+              {statusModal ? (
+                <div className="modal" onMouseLeave={toggleStatusModal}>
+                  {statusList.map((el) => (
+                    <div className="modal_elem2">
+                      <span onClick={() => setStatus(el.title)}>
+                        {el.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -161,8 +260,62 @@ const TaskDetail = ({ task, project, taskStage }) => {
         </div>
       </div>
 
-      <div className="comment">
-        <textarea placeholder="Add a comment"></textarea>
+      <div className="comments">
+        <div className="comments_all">
+          {
+            task.comments.map(comment => (
+              <div className="comments_all_comment">
+                <div className="comments_all_comment_top">
+                  <div className="user-image">JS</div>
+                  <div className="user-name">User name</div>
+                  <div className="circle"></div>
+                  <div className="comment-date">81 minutes ago</div>
+                </div>
+                <div className="comments_all_comment_bottom">{comment.text}</div>
+              </div>
+            )) 
+          }
+        </div>
+        <div className={clsx("comment")}>
+          <div className={addComment ? "addComment" : ""}>
+            <textarea
+              className="addCommentTextarea"
+              placeholder="Add a comment"
+              value={commentText}
+              onChange={(e) => handleChangeAddComment(e)}
+              onFocus={handleFocusAddComment}
+            ></textarea>
+            {addComment ? (
+              <div className="addComment_add">
+                <div className="addComment_add_left">
+                  <div>
+                    <PlusIcon />
+                  </div>
+                  <div>
+                    <TypographyIcon />
+                  </div>
+                  <div>
+                    <SmileIcon />
+                  </div>
+                  <div>
+                    <AtSymbolIcon />
+                  </div>
+                  <div>
+                    <AttachIcon />
+                  </div>
+                </div>
+                <div className="addComment_add_right">
+                  <button
+                    className="success-btn"
+                    onClick={(e) => handleAddComment(e)}
+                  >
+                    Comment
+                  </button>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -30,7 +30,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "todo",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -41,7 +46,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "doing",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -52,7 +62,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "completed",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -63,7 +78,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "completed",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -87,7 +107,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "todo",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -98,7 +123,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "doing",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -109,7 +139,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "completed",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -133,7 +168,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "todo",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -144,7 +184,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "doing",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -155,7 +200,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "doing",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -166,7 +216,12 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           status: "completed",
           priority: "priority",
-          comments: ["Bla Bla Bla"],
+          comments: [
+            {
+              id: 1,
+              text: "Bla Bla Bla",
+            },
+          ],
           subtasks: [],
           responsible: [],
         },
@@ -185,7 +240,6 @@ export const MyProjectsProvider = ({ children }) => {
     };
     setProjects([...projects, newProject]);
   };
-
   const archiveProject = (projectId) => {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
@@ -193,7 +247,6 @@ export const MyProjectsProvider = ({ children }) => {
       )
     );
   };
-
   const starProject = (projectId) => {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
@@ -208,12 +261,29 @@ export const MyProjectsProvider = ({ children }) => {
       )
     );
   };
-
   const getTasks = (status) => {
     return projects.map((project) => ({
       ...project,
       tasks: project.tasks.filter((task) => task.status === status),
     }));
+  };
+  const addCommentToTask = (projectId, taskId, newComment) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) => {
+        if (project.id === projectId) {
+          const updatedTasks = project.tasks.map((task) => {
+            if (task.id === taskId) {
+              const newComments = [...task.comments, newComment];
+              return { ...task, comments: newComments };
+            }
+            return task;
+          });
+  
+          return { ...project, tasks: updatedTasks };
+        }
+        return project;
+      })
+    );
   };
 
   return (
@@ -226,6 +296,7 @@ export const MyProjectsProvider = ({ children }) => {
         archiveProject,
         starProject,
         nonStarProject,
+        addCommentToTask
       }}
     >
       {children}

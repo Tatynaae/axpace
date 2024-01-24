@@ -211,11 +211,9 @@ const ProjectDetail = () => {
                   <img src={member.image || null} alt={`User ${index + 1}`} />
                 </div>
               ))}
-              {/* {project.members.length > 3 && ( */}
               <div className="users_user user4">
                 +{project.members.length - 3}
               </div>
-              {/* )} */}
             </div>
             <button className="shareBtn">Share</button>
           </div>

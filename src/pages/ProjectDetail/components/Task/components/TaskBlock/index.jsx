@@ -145,6 +145,7 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
       {overlay ? (
         <Overlay full={true} close={closeOverlay}>
           <TaskDetail
+          close={closeOverlay}
             task={task}
             project={project}
             taskStage={task.status.toLowerCase()}
