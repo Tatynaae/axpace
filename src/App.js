@@ -11,6 +11,7 @@ import LogSheets from "./pages/LogSheet";
 import TimeSheets from "./pages/TimeSheet";
 import ProjectDetail from "./pages/ProjectDetail";
 import "./index.scss";
+import LogSheetDetail from "./pages/LogSheet/components/LogSheetDetail";
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/log-sheets" element={<LogSheets />} />
         <Route path="/setting" element={<Settings />} />
         <Route path="/projects/*" element={<ProjectDetail />} />
+        <Route path="/log-sheets/*" element={<LogSheetDetail />} />
       </Routes>
     </div>
   );

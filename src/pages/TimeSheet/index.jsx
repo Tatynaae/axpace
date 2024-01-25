@@ -98,6 +98,7 @@ const TimeSheet = () => {
     <>
       <div className="time-sheet">
         <div className="time-sheet_container">
+          <div className="page-title">Timesheet</div>
           <div className="time-sheet_top">
             {times.map((element) => (
               <TimeCards element={element} />

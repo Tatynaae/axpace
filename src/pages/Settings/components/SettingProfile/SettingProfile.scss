@@ -1,0 +1,44 @@
+.s-p {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 20px;
+
+  &_content {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+
+    > * {
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    &_right {
+      color: #fafafa;
+    }
+
+    &_left {
+      color: #88949b;
+      width: 80px;
+      text-align: end;
+    }
+
+    &_remove-photo {
+      > label {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &_btns {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+    gap: 24px;
+  }
+}
