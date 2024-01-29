@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useThemeContext } from "../../../../context/ThemeContext";
+import clsx from "clsx";
 import DeleteModal from "../DeleteModal";
 import TaskBlock from "./components/TaskBlock";
 import Overlay from "../../../../components/Overlay";
 import PlusIcon from "../../../../assets/icons/PlusIcon";
+import ModalList from "../../../../components/UI/ModalList";
 import PointsIcon from "../../../../assets/icons/PointsIcon";
 import "./Task.scss";
 
@@ -15,6 +18,7 @@ const Task = ({
   onDeleteSection,
   onRenameSection,
 }) => {
+  const { theme } = useThemeContext();
   const [newTask, setNewTask] = useState("");
   const [overlay, setOverlay] = useState(false);
   const [newTaskBlock, setNewTaskBlock] = useState(false);
@@ -106,16 +110,32 @@ const Task = ({
     }
   };
 
+  const setList = [
+    { title: "Rename", function: handleRenameSectionClick },
+    { title: "Delete section", function: handleDeleteSectionClick },
+    { title: "Hide section", function: null },
+  ];
+
   return (
     <>
       <div className="task">
         <div className="task_head">
           {renameSection ? (
-            <div className="task_head__left">
+            <div
+              className={clsx(
+                "task_head__left",
+                theme === "dark" ? "task_head__left-d" : "task_head__left-l"
+              )}
+            >
               <input
                 type="text"
                 id={`renameInput-${section?.id}`}
-                className="renameSectionInput"
+                className={clsx(
+                  "renameSectionInput",
+                  theme === "dark"
+                    ? "renameSectionInput-d"
+                    : "renameSectionInput-l"
+                )}
                 defaultValue={section.sectionTitle}
                 value={newSectionName || section.sectionTitle}
                 onChange={handleRenameInputChange}
@@ -124,26 +144,49 @@ const Task = ({
               />
             </div>
           ) : (
-            <div className="task_head__left">{section.sectionTitle}</div>
+            <div
+              className={clsx(
+                "task_head__left",
+                theme === "dark" ? "task_head__left-d" : "task_head__left-l"
+              )}
+            >
+              {section.sectionTitle}
+            </div>
           )}
 
           <div className="task_head__right">
-            <div>
+            <div
+              className={
+                theme === "dark"
+                  ? "task_head__right_d-icon"
+                  : "task_head__right_l-icon"
+              }
+            >
               <PlusIcon />
             </div>
-            <div onClick={toggleSettingsModal}>
+            <div
+              className={
+                theme === "dark"
+                  ? "task_head__right_d-icon"
+                  : "task_head__right_l-icon"
+              }
+              onClick={toggleSettingsModal}
+            >
               <PointsIcon />
             </div>
             {settingsModal && (
               <div className="settingsModal">
-                <span onClick={handleRenameSectionClick}>Rename</span>
-                <span onClick={handleDeleteSectionClick}>Delete section</span>
-                <span>Hide section</span>
+                <ModalList list={setList} />
               </div>
             )}
           </div>
         </div>
-        <div className="task_content">
+        <div
+          className={clsx(
+            "task_content",
+            theme === "dark" ? "task_d-content" : "task_l-content"
+          )}
+        >
           {section.tasks.map((el) => (
             <TaskBlock
               task={el}
@@ -155,7 +198,7 @@ const Task = ({
           ))}
 
           {newTaskBlock && (
-            <div className="newBlock block">
+            <div className={clsx("block", theme === "dark" ? "d-block" : "l-block")}>
               <textarea
                 placeholder="Write task name"
                 ref={textareaRef}
@@ -166,7 +209,13 @@ const Task = ({
             </div>
           )}
 
-          <div className="addTask" onClick={toggleNewTask}>
+          <div
+            className={clsx(
+              "addTask",
+              theme === "dark" ? "addTask-d" : "addTask-l"
+            )}
+            onClick={toggleNewTask}
+          >
             <PlusIcon />
             <span>Add task </span>
           </div>

@@ -1,53 +1,72 @@
-.activities {
+.all-activities {
   width: 100%;
-  .allActivity,
-  &_dates {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 15px;
-    grid-row-gap: 0px;
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 
-  }
-  .allActivity {
-    height: 84%;
-    .activity {
+  .activity {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+
+    gap: 8px;
+    &-time {
       width: 100%;
-      height: 100%;
-      background: #2c3236;
+      height: 190px;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: 1fr;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: end;
 
-      &_number {
-        width: 100%;
-        background: #2A57C8;
+      &_dark {
+        color: #fafafa;
+      }
+      &_light {
+        color: #1e1f21;
       }
 
-      > span {
-        color: #fafafa;
+      > * {
+        padding: 8px;
+        text-align: center;
+        width: 120px;
         font-family: Inter;
         font-size: 16px;
         font-weight: 400;
         letter-spacing: -0.176px;
       }
     }
-  }
-  &_dates {
-    border-top: 1px solid #2c3236;
-    margin: 8px 0 0 0;
-    padding: 8px 0 0 0;
+    &-sq {
+      width: 86%;
+    }
+    &-day {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: 1fr;
+      grid-row-gap: 0px;
 
-    .days,
-    .total {
-      color: #88949b;
-      font-family: Inter;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: -0.176px;
+      &_dark {
+        color: #88949b;
+      }
+      &_light {
+        color: #666a6e;
+      }
+
+      > * {
+        padding: 8px;
+        text-align: center;
+        width: 120px;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: -0.176px;
+      }
     }
   }
 }

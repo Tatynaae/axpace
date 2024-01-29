@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useMyProjectsContext } from "../../../../../../../context/MyProjectsContext";
 import clsx from "clsx";
+import { useMyProjectsContext } from "../../../../../../../context/MyProjectsContext";
 import PlusIcon from "../../../../../../../assets/icons/PlusIcon";
 import MinusIcon from "../../../../../../../assets/icons/MinusIcon";
 import SmileIcon from "../../../../../../../assets/icons/SmileIcon";
@@ -15,7 +15,7 @@ import ArrowRightIcon from "../../../../../../../assets/icons/ArrowRightIcon";
 import DoublePointsIcon from "../../../../../../../assets/icons/DoublePointsIcon";
 import "./TaskDetail.scss";
 
-const TaskDetail = ({ task, project, taskStage, close }) => {
+const TaskDetail = ({ task, project, close }) => {
   const subtaskRef = useRef();
   const { setProjects, addCommentToTask } = useMyProjectsContext();
   const [subTask, setSubTask] = useState(false);

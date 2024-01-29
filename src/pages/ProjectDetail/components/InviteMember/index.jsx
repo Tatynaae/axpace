@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useThemeContext } from "../../../../context/ThemeContext";
 import Overlay from "../../../../components/Overlay";
 import CloseIcon from "../../../../assets/icons/CloseIcon";
 import MemberIcon from "../../../../assets/icons/MemberIcon";
@@ -6,6 +7,7 @@ import BorderedInput from "../../../../components/UI/BorderedInput";
 import "./InviteMember.scss";
 
 const InviteMember = ({ project }) => {
+  const { theme } = useThemeContext();
   const [overlay, setOverlay] = useState(false);
 
   const toggleOverlay = () => {
@@ -14,7 +16,13 @@ const InviteMember = ({ project }) => {
 
   return (
     <>
-      <button className="shareBtn" onClick={toggleOverlay}>
+      <button
+        className="shareBtn"
+        onClick={toggleOverlay}
+        style={{
+          backgroundColor: theme === "dark" ? "#2a57c8" : "#4683F7",
+        }}
+      >
         Share
       </button>
       {overlay ? (

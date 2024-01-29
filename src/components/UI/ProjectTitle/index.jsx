@@ -13,7 +13,14 @@ const ProjectTitle = ({ title, path, ...props }) => {
 
   return (
     <div className="project-title" onClick={handleNavigate} {...props}>
-      <div className="project-title_icon">N</div>
+      <div
+        className="project-title_icon"
+        style={{
+          backgroundColor: theme === "dark" ? "#2a57c8" : "#4683F7",
+        }}
+      >
+        N
+      </div>
       <span className={theme === "dark" ? "darkTitle" : "lightTitle"}>
         {title}
       </span>

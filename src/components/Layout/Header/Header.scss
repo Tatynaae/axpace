@@ -34,9 +34,30 @@
       font-family: Inter;
       font-size: 20px;
       font-weight: 400;
+      width: 80px;
     }
 
-    .pause {
+      .pause {
+        background: rgba(197, 133, 10, 0.16);
+      }
+
+      .reset {
+        background: rgba(204, 62, 78, 0.16);
+      }
+
+      .reset,
+      .pause {
+        border-radius: 50%;
+        display: flex;
+        width: 28px;
+        height: 28px;
+        padding: 4px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+    .start {
       border-radius: 50%;
       background: rgba(25, 137, 63, 0.16);
       display: flex;
@@ -52,6 +73,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    position: relative;
 
     .theme,
     .notification {

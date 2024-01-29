@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useThemeContext } from "../../../../../../context/ThemeContext";
+import clsx from "clsx";
 import Assign from "../Assign";
 import TaskDetail from "./TaskDetail";
 import Overlay from "../../../../../../components/Overlay";
+import ModalList from "../../../../../../components/UI/ModalList";
 import PointsIcon from "../../../../../../assets/icons/PointsIcon";
 import SharedIcon from "../../../../../../assets/icons/SharedIcon";
 import CommentIcon from "../../../../../../assets/icons/CommentIcon";
@@ -9,6 +12,7 @@ import MoveRightArrowIcon from "../../../../../../assets/icons/MoveRightArrowIco
 import "./TaskBlock.scss";
 
 const TaskBlock = ({ task, project, sections, onDelete }) => {
+  const { theme } = useThemeContext();
   const [edit, setEdit] = useState(false);
   const [move, setMove] = useState(false);
   const [rename, setRename] = useState(false);
@@ -36,6 +40,7 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
   };
 
   const handleRenameChange = (e) => {
+    e.preventDefault();
     setNewTaskName(e.target.value);
   };
 
@@ -63,50 +68,51 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
     }
   }, [rename]);
 
+  const setList = [
+    { title: "Rename", function: openRename },
+    { title: "Delete task", function: () => onDelete(task.id) },
+    { title: "Copy link", function: null },
+    {
+      title: "Move",
+      icon: <MoveRightArrowIcon />,
+      hover: () => setMove(true),
+    },
+  ];
   return (
     <>
       <div
-        className="block"
+        className={clsx("block", theme === "dark" ? "d-block" : "l-block")}
         onClick={openTask}
         onMouseOver={() => setEdit(true)}
         onMouseLeave={handleLeaveBlock}
       >
-        <div className="block_taskName">
+        <div
+          className={theme === "dark" ? "block_taskName-d" : "block_taskName-l"}
+        >
           {rename ? (
             <input
               type="text"
               ref={renameInputRef}
-              className="rename"
+              className={theme === "dark" ? "d-rename" : '"l-rename"'}
               defaultValue={task.title}
               onBlur={() => setRename(false)}
-              onChange={handleRenameChange}
+              onChange={(e) => handleRenameChange(e)}
               onKeyDown={handleRenameKeyDown}
+              onClick={(e) => e.preventDefault()}
             />
           ) : (
             <p>{task.title}</p>
           )}
           {edit && (
-            <div className="editTask" onClick={(e) => toggleEditModal(e)}>
+            <div
+              className={theme === "dark" ? "editTask-d" : "editTask-l"}
+              onClick={(e) => toggleEditModal(e)}
+            >
               <PointsIcon />
               {editModal && (
                 <div className="list">
-                  <span onClick={openRename}>Rename</span>
-                  <span onClick={() => onDelete(task.id)}>Delete task</span>
-                  <span>Copy link</span>
-                  <span
-                    onMouseOver={() => setMove(true)}
-                    // onMouseLeave={() => setMove(false)}
-                  >
-                    Move
-                    <MoveRightArrowIcon />
-                    {move && (
-                      <div className="list second-list">
-                        {sections.map((section) => (
-                          <span key={section.id}>{section.sectionTitle}</span>
-                        ))}
-                      </div>
-                    )}
-                  </span>
+                  <ModalList list={setList} />
+                  {move && (<div className="second-list"><ModalList list={sections}/></div> )}
                 </div>
               )}
             </div>
@@ -115,19 +121,23 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
         {(task.status || task.priority) && (
           <div className="block_first">
             <div className="block_first_left">
-              {task.status ? <div className="status">{task.status}</div> : null}
+              {task.status ? (
+                <div className={theme === "dark" ? "status-d" : "status-l"}>
+                  {task.status}
+                </div>
+              ) : null}
               {task.priority ? (
                 <div className="priority">{task.priority}</div>
               ) : null}
             </div>
             <div className="block_first_right">
               {task.comments !== 0 && (
-                <div className="comments">
+                <div className={theme === "dark" ? "comments-d" : "comments-l"}>
                   <span>{task.comments.length}</span>
                   <CommentIcon />
                 </div>
               )}
-              <div className="shared">
+              <div className={theme === "dark" ? "shared-d" : "shared-l"}>
                 <span>2</span>
                 <SharedIcon />
               </div>
@@ -135,17 +145,25 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
           </div>
         )}
         <div className="block_second">
-          <Assign project={project}/>
-          <div className="date">{task.date}</div>
+          <Assign project={project} />
+          <div className={theme === "dark" ? "date-d" : "date-l"}>
+            {task.date}
+          </div>
         </div>
         <div className="block_third">
-          <div className="block_third__text">GS-17</div>
+          <div
+            className={
+              theme === "dark" ? "block_third__text-d" : "block_third__text-l"
+            }
+          >
+            GS-17
+          </div>
         </div>
       </div>
       {overlay ? (
         <Overlay full={true} close={closeOverlay}>
           <TaskDetail
-          close={closeOverlay}
+            close={closeOverlay}
             task={task}
             project={project}
             taskStage={task.status.toLowerCase()}

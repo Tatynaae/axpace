@@ -94,12 +94,19 @@
       }
     }
 
-    .line {
+    .dark-line {
+      border-bottom: 1px solid #2c3236;
+    }
+    .light-line {
+      border-bottom: 1px solid #d4d8db;
+    }
+
+    .dark-line,
+    .light-line {
       width: 103.5%;
       position: absolute;
       left: -40px;
       bottom: 0;
-      border-bottom: 1px solid #2c3236;
     }
   }
 
@@ -119,15 +126,31 @@
 
       > * {
         color: #88949b;
+        position: relative;
+      }
+
+      &_filter {
+        width: 166px;
+        position: absolute;
+        right: 40px;
+        top: 90%;
+        z-index: 2;
       }
     }
 
-    .line {
+    .dark-line {
+      border-bottom: 1px solid #2c3236;
+    }
+    .light-line {
+      border-bottom: 1px solid #d4d8db;
+    }
+
+    .dark-line,
+    .light-line {
       width: 103.5%;
       position: absolute;
       left: -40px;
       bottom: 0;
-      border-bottom: 1px solid #2c3236;
     }
   }
 
@@ -140,17 +163,23 @@
     overflow-x: scroll;
     gap: 16px;
 
-    &__addButton {
-      width: 264px;
+    &__addInput-d {
+      border: 1px solid #fafafa;
+      color: #fafafa;
     }
-    &__addInput {
+
+    &__addInput-l {
+      border: 1px solid #1e1f21;
+      color: #1e1f21;
+    }
+
+    &__addInput-d,
+    &__addInput-l {
       width: 264px;
       border-radius: 8px;
-      border: 1px solid #fafafa;
       background: transparent;
       padding: 12px;
       outline: none;
-      color: #fafafa;
       font-family: Inter;
       font-size: 14px;
       font-weight: 500;

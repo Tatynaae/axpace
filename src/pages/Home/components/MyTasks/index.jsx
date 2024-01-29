@@ -72,7 +72,7 @@ const MyTasks = () => {
               ));
             })}
       </div>
-      <Link to={"#"} className="show">
+      <Link to={"#"} className={theme === "dark" ? "dark-show" : "light-show"}>
         Show more
       </Link>
     </div>

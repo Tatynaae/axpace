@@ -14,21 +14,19 @@
     gap: 8px;
     margin-bottom: 10px;
 
-
     &::-webkit-scrollbar {
       width: 5px;
     }
-  
+
     &::-webkit-scrollbar-track {
       background-color: transparent;
       border-radius: 30px;
     }
-  
+
     &::-webkit-scrollbar-thumb {
-      background-color: #88949B;
+      background-color: #88949b;
       border-radius: 4px;
     }
-
 
     .dark-task {
       border: 1px solid #2c3236;
@@ -78,10 +76,17 @@
     }
   }
 
-  .show {
-    color: #88949b;
+  .dark-show,
+  .light-show {
     font-family: Inter;
     font-size: 12px;
     font-weight: 500;
+  }
+
+  .dark-show {
+    color: #88949b;
+  }
+  .light-show {
+    color: #1e1f21;
   }
 }

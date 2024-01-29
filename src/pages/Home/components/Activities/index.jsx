@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useThemeContext } from "../../../../context/ThemeContext";
 import Tabs from "../../../../components/UI/Tabs";
 import "./Activities.scss";
 
@@ -14,8 +15,8 @@ const activities = [
       { day: "Fri", time: "9:15" },
       { day: "Sat", time: "0" },
       { day: "Sun", time: "0" },
+      { day: "Total", time: "30:10" },
     ],
-    total: "30:10",
   },
   {
     title: "Monthly",
@@ -24,55 +25,17 @@ const activities = [
 ];
 
 const Activities = () => {
+  const { theme } = useThemeContext();
   const [isActive, setIsActive] = useState(activities[0].value);
 
   const handleActive = (value) => {
     setIsActive(value);
   };
 
-  function timeToMinutes(time) {
-    if (time === "0") {
-      return 0;
-    }
-
+  const parseTimeToHours = (time) => {
     const [hours, minutes] = time.split(":");
-    return parseInt(hours) * 60 + parseInt(minutes);
-  }
-
-  const calculatePercentage = (time) => {
-    const totalMinutes = activities[0].activity.reduce(
-      (total, activity) => total + timeToMinutes(activity.time),
-      0
-    );
-    const minutes = timeToMinutes(time);
-    return (minutes / totalMinutes) * 100;
+    return parseInt(hours, 10) + parseInt(minutes, 10) / 60;
   };
-
-  const calculateTotalHeight = () => {
-    const totalHeight = 210;
-    return { height: `${totalHeight}px` };
-  };
-
-  const renderWeeklyActivities = () => {
-    return activities[0].activity.map((activity, index) => (
-      <div className="activity" key={index} style={{ height: "100%" }}>
-        <span>{activity.time} h</span>
-        <div
-          className="activity_number"
-          style={{ height: `${calculatePercentage(activity.time) * 3}%` }}
-        ></div>
-      </div>
-    ));
-  };
-
-  const renderDays = () => {
-    return activities[0].activity.map((activity, index) => (
-      <div className="days" key={index}>
-        <span>{activity.day}</span>
-      </div>
-    ));
-  };
-
   return (
     <>
       <Tabs
@@ -81,20 +44,57 @@ const Activities = () => {
         onSelect={handleActive}
         isActive={isActive}
       />
-      <div className="activities" style={calculateTotalHeight()}>
-        <div className="allActivity">
-          {isActive === "Weekly" && renderWeeklyActivities()}
-          <div className="activity">
-            <span>{activities[0].total}</span>
-          </div>
-        </div>
+      <div className="all-activities">
+        {activities[0].activity.map((el, idx) => {
+          const timeInHours = parseTimeToHours(el.time);
+          const percentageHeight = (timeInHours / 30.1667) * 100;
 
-        <div className="activities_dates">
-          {isActive === "Weekly" && renderDays()}
-          <div className="total">
-            <span>Total</span>
-          </div>
-        </div>
+          const style =
+            el.time === "0"
+              ? {
+                  height: "190px",
+                  background: theme === "dark" ? "#2C3236" : "#D4D8DB",
+                }
+              : {
+                  height: `${percentageHeight}%`,
+                  background: theme === "dark" ? "#2A57C8" : "#4683F7",
+                };
+          return (
+            <div className="activity" key={idx}>
+              <div className="activity-time">
+                <span
+                  className={
+                    theme === "dark"
+                      ? "activity-time_dark"
+                      : "activity-time_light"
+                  }
+                >
+                  {el.time}
+                </span>
+                <div className="activity-sq" style={style}></div>
+              </div>
+              <div
+                className={"activity-day"}
+                style={{
+                  borderTop:
+                    theme === "dark"
+                      ? "1px solid #2c3236"
+                      : "1px solid #D4D8DB",
+                }}
+              >
+                <span
+                  className={
+                    theme === "dark"
+                      ? "activity-day_dark"
+                      : "activity-day_light"
+                  }
+                >
+                  {el.day}
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </>
   );

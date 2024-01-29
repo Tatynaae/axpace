@@ -12,8 +12,14 @@
     justify-content: space-between;
     gap: 12px;
 
-    &__left {
+    &__left-d {
       color: #fafafa;
+    }
+    &__left-l {
+      color: #1e1f21;
+    }
+
+    &__left {
       font-family: Inter;
       font-size: 16px;
       font-weight: 500;
@@ -25,11 +31,18 @@
         outline: none;
         border: none;
         background: transparent;
-        color: #fafafa;
         font-family: Inter;
         font-size: 16px;
         font-weight: 500;
+      }
+
+      .renameSectionInput-d {
+        color: #fafafa;
         border-bottom: 1px solid #fafafa;
+      }
+      .renameSectionInput-l {
+        color: #1e1f21;
+        border-bottom: 1px solid #1e1f21;
       }
     }
     &__right {
@@ -45,48 +58,45 @@
         color: #88949b;
         cursor: pointer;
         transition: 0.2s;
+      }
 
+      &_d-icon {
         &:hover {
           border-radius: 4px;
           background: #2c3236;
         }
       }
+      &_l-icon {
+        &:hover {
+          border-radius: 4px;
+          background: #d4d8db;
+        }
+      }
 
       .settingsModal {
+        width: 166px;
         position: absolute;
         top: 100%;
         left: 50%;
         z-index: 3;
-        border-radius: 8px;
-        border: 1px solid #2c3236;
-        background: #0e1112;
-        display: flex;
-        flex-direction: column;
-
-        > span {
-          padding: 10px;
-          width: 165px;
-          transition: 0.2s;
-          color: #fafafa;
-          font-family: Inter;
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 24px; /* 150% */
-
-          &:hover {
-            background: #25272c;
-          }
-        }
       }
     }
   }
 
+  &_l-content {
+    background: var(
+      --gradien-light,
+      linear-gradient(180deg, #eef0f5 0%, #f9fbfd 91.67%)
+    );
+  }
+  &_d-content {
+    background: linear-gradient(180deg, #24272d 0%, #1f2125 100%);
+  }
   &_content {
     width: 264px;
     height: 100%;
     padding: 8px 8px 80px 8px;
     border-radius: 12px;
-    background: linear-gradient(180deg, #24272d 0%, #1f2125 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,15 +111,66 @@
       gap: 8px;
       cursor: pointer;
       transition: 0.2s;
+      border-radius: 12px;
+    }
 
+    .addTask-d {
       > * {
         color: #88949b;
       }
 
       &:hover {
-        border-radius: 12px;
         background: #2c3236;
       }
+    }
+    .addTask-l {
+      > * {
+        color: #666a6e;
+      }
+
+      &:hover {
+        background: #d4d8db;
+      }
+    }
+    .d-block {
+      border: 1px solid #2c3236;
+      background: #1e2024;
+
+      &:hover {
+        border: 1px solid #88949b;
+      }
+      > textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+      }
+    }
+    .l-block {
+      border: 1px solid #d4d8db;
+      background: #fafdff;
+
+      &:hover {
+        border: 1px solid #d4d8db;
+      }
+      > textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        color: #1e1f21;
+      }
+    }
+
+    .block {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: self-start;
+      gap: 16px;
+      transition: 0.2s;
+
+      
     }
   }
 }
