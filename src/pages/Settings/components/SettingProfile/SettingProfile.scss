@@ -20,11 +20,21 @@
     &_right {
       color: #fafafa;
     }
+    &_right-l {
+      color: #1E1F21;
+    }
 
-    &_left {
-      color: #88949b;
+    &_left,
+    &_left-l {
       width: 80px;
       text-align: end;
+    }
+
+    &_left-l {
+      color: #666a6e;
+    }
+    &_left {
+      color: #88949b;
     }
 
     &_remove-photo {

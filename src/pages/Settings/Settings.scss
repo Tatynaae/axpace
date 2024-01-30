@@ -6,17 +6,26 @@
   justify-content: center;
 
   &_content {
-    padding: 24px;
-    border-radius: 12px;
     border: 1px solid #2c3236;
     background: #25272c;
+  }
+
+  &_content-l {
+    border: 1px solid #d4d8db;
+    background: #eef0f5;
+  }
+
+  &_content,
+  &_content-l {
+    padding: 24px;
+    border-radius: 12px;
+
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 24px;
 
     &_title {
-      color: #fafafa;
       font-family: Inter;
       font-size: 20px;
       font-weight: 500;
@@ -28,7 +37,7 @@
       align-items: center;
       gap: 257px;
 
-      .gray {
+      .gray, .gray-l {
         cursor: pointer;
       }
     }

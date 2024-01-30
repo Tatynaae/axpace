@@ -10,7 +10,6 @@
   &_third,
   &_fours {
     > span {
-      color: #fafafa;
       font-family: Inter;
       font-size: 16px;
       font-weight: 400;
@@ -19,6 +18,12 @@
     &_time {
       background: #1e2024;
       border-radius: 8px;
+      width: 87px;
+    }
+    &_time-l {
+      background: #fafdff;
+      border-radius: 8px;
+      width: 87px;
     }
   }
   &_first {
@@ -42,13 +47,20 @@
       align-items: center;
       gap: 8px;
     }
-    &_time {
+    &_time,
+    &_time-l {
       width: 54px;
-      color: #88949b;
       font-family: Inter;
       font-size: 14px;
       font-weight: 500;
       padding: 9px 12px;
+    }
+    &_time-l {
+      color: #666a6e;
+      border: 1px solid #d4d8db;
+    }
+    &_time {
+      color: #88949b;
       border: 1px solid #2c3236;
     }
   }
@@ -62,10 +74,16 @@
   }
 
   &_elements {
+    color: #fafafa;
+  }
+  &_elements-l {
+    color: #1e1f21;
+  }
+  &_elements,
+  &_elements-l {
     display: flex;
     flex-direction: column;
     align-items: start;
-    color: #fafafa;
     font-family: Inter;
     font-size: 16px;
     font-weight: 400;

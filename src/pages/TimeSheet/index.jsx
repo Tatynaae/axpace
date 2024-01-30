@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useThemeContext } from "../../context/ThemeContext";
 import TimeCards from "./components/TimeCards";
 import Overlay from "../../components/Overlay";
 import RedImg from "../../assets/images/red.png";
@@ -9,8 +10,10 @@ import GreenArrow from "../../assets/icons/GreenArrow";
 import BorderedInput from "../../components/UI/BorderedInput";
 import SlideMonthArrowIcon from "../../assets/icons/SlideMonthArrowIcon";
 import "./TimeSheet.scss";
+import clsx from "clsx";
 
 const TimeSheet = () => {
+  const { theme } = useThemeContext();
   const [overlay, setOverlay] = useState(false);
   const times = [
     {
@@ -98,7 +101,9 @@ const TimeSheet = () => {
     <>
       <div className="time-sheet">
         <div className="time-sheet_container">
-          <div className="page-title">Timesheet</div>
+          <div className={theme === "dark" ? "page-title" : "page-title-l"}>
+            Timesheet
+          </div>
           <div className="time-sheet_top">
             {times.map((element) => (
               <TimeCards element={element} />
@@ -108,28 +113,116 @@ const TimeSheet = () => {
             <span className="left-a">
               <SlideMonthArrowIcon />
             </span>
-            <span className="month-t">October</span>
+            <span className={theme === "dark" ? "month-t" : "month-t-l"}>
+              October
+            </span>
             <span className="right-a">
               <SlideMonthArrowIcon />
             </span>
           </div>
-          <div className="time-sheet_week">
+          <div
+            className={
+              theme === "dark" ? "time-sheet_week" : "time-sheet_week-l"
+            }
+          >
             <div className="row">
-              <div className="row_col gray">Week</div>
-              <div className="row_col gray">Date</div>
-              <div className="row_col gray">Start</div>
-              <div className="row_col gray">Finish</div>
-              <div className="row_col gray">Hours</div>
-              <div className="row_col gray">Edit</div>
+              <div
+                className={clsx(
+                  "row_col",
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
+              >
+                Week
+              </div>
+              <div
+                className={clsx(
+                  "row_col",
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
+              >
+                Date
+              </div>
+              <div
+                className={clsx(
+                  "row_col",
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
+              >
+                Start
+              </div>
+              <div
+                className={clsx(
+                  "row_col",
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
+              >
+                Finish
+              </div>
+              <div
+                className={clsx(
+                  "row_col",
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
+              >
+                Hours
+              </div>
+              <div
+                className={clsx(
+                  "row_col",
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
+              >
+                Edit
+              </div>
             </div>
             {weeks.map((week) => (
               <div className="row">
-                <div className="row_col white">{week.day}</div>
-                <div className="row_col white">{week.date}</div>
-                <div className="row_col white">{week.start}</div>
-                <div className="row_col white">{week.finish}</div>
-                <div className="row_col white">{week.hours}</div>
-                <div className="row_col gray">
+                <div
+                  className={clsx(
+                    "row_col",
+                    theme === "dark" ? "white" : "dark-white"
+                  )}
+                >
+                  {week.day}
+                </div>
+                <div
+                  className={clsx(
+                    "row_col",
+                    theme === "dark" ? "white" : "dark-white"
+                  )}
+                >
+                  {week.date}
+                </div>
+                <div
+                  className={clsx(
+                    "row_col",
+                    theme === "dark" ? "white" : "dark-white"
+                  )}
+                >
+                  {week.start}
+                </div>
+                <div
+                  className={clsx(
+                    "row_col",
+                    theme === "dark" ? "white" : "dark-white"
+                  )}
+                >
+                  {week.finish}
+                </div>
+                <div
+                  className={clsx(
+                    "row_col",
+                    theme === "dark" ? "white" : "dark-white"
+                  )}
+                >
+                  {week.hours}
+                </div>
+                <div
+                  className={clsx(
+                    "row_col",
+                    theme === "dark" ? "gray" : "gray-l"
+                  )}
+                >
                   <div className="edit" onClick={toggleOverlay}>
                     <EditIcon />
                   </div>
@@ -142,18 +235,37 @@ const TimeSheet = () => {
 
       {overlay ? (
         <Overlay close={toggleOverlay}>
-          <div className="edit-timesheet">
+          <div
+            className={theme === "dark" ? "edit-timesheet" : "edit-timesheet-l"}
+          >
             <div className="edit-timesheet_first">
-              <span className="white">Edit timesheet</span>
-              <span className="gray close" onClick={toggleOverlay}>
+              <span className={theme === "dark" ? "white" : "white-l"}>
+                Edit timesheet
+              </span>
+              <span
+                className={clsx("close", theme === "dark" ? "gray" : "gray-l")}
+                onClick={toggleOverlay}
+              >
                 <CloseIcon />
               </span>
             </div>
-            <div className="edit-timesheet_second">
+            <div
+              className={
+                theme === "dark"
+                  ? "edit-timesheet_second"
+                  : "edit-timesheet_second-l"
+              }
+            >
               <span>Date</span>
               <BorderedInput defaultValue="17.03.24" />
             </div>
-            <div className="edit-timesheet_third">
+            <div
+              className={
+                theme === "dark"
+                  ? "edit-timesheet_third"
+                  : "edit-timesheet_third-l"
+              }
+            >
               <div>
                 <span>Start time</span>
                 <BorderedInput defaultValue="9:50" />
@@ -164,10 +276,16 @@ const TimeSheet = () => {
               </div>
             </div>
             <div className="edit-timesheet_fours">
-              <button className="cencel-btn" onClick={toggleOverlay}>
+              <button
+                className={theme === "dark" ? "cencel-btn" : "cencel-btn-l"}
+                onClick={toggleOverlay}
+              >
                 Cencel
               </button>
-              <button className="success-btn" onClick={toggleOverlay}>
+              <button
+                className={theme === "dark" ? "success-btn" : "success-btn-l"}
+                onClick={toggleOverlay}
+              >
                 Save
               </button>
             </div>

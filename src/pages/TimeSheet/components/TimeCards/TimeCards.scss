@@ -1,7 +1,15 @@
 .card-container {
-  border-radius: 16px;
   border: 1px solid #2c3236;
   background: #25272c;
+}
+.card-container-l {
+  border: 1px solid #d4d8db;
+  background: #eef0f5;
+}
+
+.card-container,
+.card-container-l {
+  border-radius: 16px;
   width: 264px;
   height: 139px;
   flex-shrink: 0;
@@ -15,29 +23,51 @@
 
   .card-title {
     color: #fafafa;
+  }
+  .card-title-l {
+    color: #1e1f21;
+  }
+  .card-title,
+  .card-title-l {
     font-family: Inter;
     font-size: 20px;
     font-weight: 400;
   }
-
   .card-time {
     color: #fafafa;
+    > span {
+      color: #88949b;
+    }
+  }
+  .card-time-l {
+    color: #1e1f21;
+    > span {
+      color: #666a6e;
+    }
+  }
+  .card-time,
+  .card-time-l {
     font-family: Inter;
     font-size: 32px;
     font-weight: 400;
 
     > span {
-      color: #88949b;
       font-family: Inter;
       font-size: 18px;
       font-weight: 400;
     }
   }
 
+  .card-compare-l {
+    color: #666a6e;
+  }
   .card-compare {
+    color: #88949b;
+  }
+  .card-compare,
+  .card-compare-l {
     display: flex;
     align-items: center;
-    color: #88949b;
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;

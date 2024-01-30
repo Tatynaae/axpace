@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import { useMyProjectsContext } from "../../../../../../../context/MyProjectsContext";
+import { useThemeContext } from "../../../../../../../context/ThemeContext";
 import PlusIcon from "../../../../../../../assets/icons/PlusIcon";
 import MinusIcon from "../../../../../../../assets/icons/MinusIcon";
 import SmileIcon from "../../../../../../../assets/icons/SmileIcon";
@@ -17,6 +18,7 @@ import "./TaskDetail.scss";
 
 const TaskDetail = ({ task, project, close }) => {
   const subtaskRef = useRef();
+  const { theme } = useThemeContext();
   const { setProjects, addCommentToTask } = useMyProjectsContext();
   const [subTask, setSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
@@ -41,7 +43,7 @@ const TaskDetail = ({ task, project, close }) => {
 
   const handleAddSubTask = (projectId, taskId) => {
     const newSubTask = { id: task.subtasks.length + 1, title: subTaskTitle };
-  
+
     setProjects((prevProjects) =>
       prevProjects.map((project) => {
         if (project.id === projectId) {
@@ -52,17 +54,16 @@ const TaskDetail = ({ task, project, close }) => {
             }
             return task;
           });
-  
+
           return { ...project, tasks: updatedTasks };
         }
         return project;
       })
     );
-  
+
     setSubTask(false);
     setSubTaskTitle("");
   };
-  
 
   const createTask = () => {
     if (subTaskTitle.trim().length > 0) {
@@ -129,13 +130,24 @@ const TaskDetail = ({ task, project, close }) => {
   };
 
   return (
-    <div className="task-detail" onClick={handleClickTaskDetail}>
-      <div className="task-detail_top">
-        <div className="task-detail_top_left">
+    <div
+      className={clsx(
+        "task-detail",
+        theme === "dark" ? "task-detail-d" : "task-detail-l"
+      )}
+      onClick={handleClickTaskDetail}
+    >
+      <div
+        className={clsx(
+          "task-detail_top",
+          theme === "dark" ? "task-detail_top-d" : "task-detail_top-l"
+        )}
+      >
+        <div className="left">
           <AppointedIcon />
           <span>Appointed</span>
         </div>
-        <div className="task-detail_top_right">
+        <div className="right">
           <div>
             <AttachIcon />
           </div>
@@ -146,26 +158,79 @@ const TaskDetail = ({ task, project, close }) => {
       </div>
 
       <div className="task-detail_content">
-        <div className="bread-crumbs">
+        <div className={theme === "dark" ? "bread-crumbs-d" : "bread-crumbs-l"}>
           <span>Task </span>
           <span>
             <ArrowRightIcon />
           </span>
           <span>Subtask</span>
         </div>
-        <h1 className="task-name">{task.title}</h1>
+        <h1
+          className="task-name"
+          style={{
+            color: theme === "dark" ? "#fafafa" : "#1E1F21",
+          }}
+        >
+          {task.title}
+        </h1>
         <div className="about-task">
           <div className="about-task_info">
-            <div className="about-task_info_left">Project</div>
-            <div className="about-task_info_right">{project.title}</div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_left"
+                  : "about-task_info_left-l"
+              }
+            >
+              Project
+            </div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_right"
+                  : "about-task_info_right-l"
+              }
+            >
+              {project.title}
+            </div>
           </div>
           <div className="about-task_info">
-            <div className="about-task_info_left">Code</div>
-            <div className="about-task_info_right">GS-17</div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_left"
+                  : "about-task_info_left-l"
+              }
+            >
+              Code
+            </div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_right"
+                  : "about-task_info_right-l"
+              }
+            >
+              GS-17
+            </div>
           </div>
           <div className="about-task_info">
-            <div className="about-task_info_left">Assignee</div>
-            <div className="about-task_info_Right">
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_left"
+                  : "about-task_info_left-l"
+              }
+            >
+              Assignee
+            </div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_Right"
+                  : "about-task_info_Right-l"
+              }
+            >
               <span>
                 <MemberIcon />
               </span>
@@ -173,8 +238,22 @@ const TaskDetail = ({ task, project, close }) => {
             </div>
           </div>
           <div className="about-task_info">
-            <div className="about-task_info_left">Due date</div>
-            <div className="about-task_info_Right">
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_left"
+                  : "about-task_info_left-l"
+              }
+            >
+              Due date
+            </div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_Right"
+                  : "about-task_info_Right-l"
+              }
+            >
               <span>
                 <TimesheetsIcon />
               </span>
@@ -182,9 +261,21 @@ const TaskDetail = ({ task, project, close }) => {
             </div>
           </div>
           <div className="about-task_info">
-            <div className="about-task_info_left">Priority</div>
             <div
-              className={`about-task_info_Right`}
+              className={
+                theme === "dark"
+                  ? "about-task_info_left"
+                  : "about-task_info_left-l"
+              }
+            >
+              Priority
+            </div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_Right"
+                  : "about-task_info_Right-l"
+              }
               onClick={togglePriorityModal}
             >
               {priorityContent}
@@ -205,8 +296,23 @@ const TaskDetail = ({ task, project, close }) => {
             </div>
           </div>
           <div className="about-task_info">
-            <div className="about-task_info_left">Status</div>
-            <div className="about-task_info_Right" onClick={toggleStatusModal}>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_left"
+                  : "about-task_info_left-l"
+              }
+            >
+              Status
+            </div>
+            <div
+              className={
+                theme === "dark"
+                  ? "about-task_info_Right"
+                  : "about-task_info_Right-l"
+              }
+              onClick={toggleStatusModal}
+            >
               {statusContent}
               {statusModal ? (
                 <div className="modal" onMouseLeave={toggleStatusModal}>
@@ -223,17 +329,32 @@ const TaskDetail = ({ task, project, close }) => {
           </div>
         </div>
 
-        <textarea className="description" placeholder="Description"></textarea>
+        <textarea
+          className={theme === "dark" ? "description-d" : "description-l"}
+          placeholder="Description"
+        ></textarea>
 
-        <div className="subtask">
+        <div className={theme === "dark" ? "subtask-d" : "subtask-l"}>
           <span>Subtask</span>
 
           {task.subtasks.map((subTask) => (
             <div className="subtask-title" key={subTask.id}>
-              <div className="subtask-title_left">
+              <div
+                className={
+                  theme === "dark"
+                    ? "subtask-title_left"
+                    : "subtask-title_left-l"
+                }
+              >
                 <DoublePointsIcon /> <span>{subTask.title}</span>
               </div>
-              <div className="subtask-title_right">
+              <div
+                className={
+                  theme === "dark"
+                    ? "subtask-title_right"
+                    : "subtask-title_right-l"
+                }
+              >
                 <AppointedIcon /> <ArrowRightIcon />
               </div>
             </div>
@@ -253,25 +374,55 @@ const TaskDetail = ({ task, project, close }) => {
       </div>
 
       <div className="comments">
-        <div className="comments_all">
-          {
-            task.comments.map(comment => (
-              <div className="comments_all_comment">
-                <div className="comments_all_comment_top">
-                  <div className="user-image">JS</div>
-                  <div className="user-name">User name</div>
-                  <div className="circle"></div>
-                  <div className="comment-date">81 minutes ago</div>
+        <div
+          className={clsx(
+            "comments_all",
+            theme === "dark" ? "comments-d" : "comments-l"
+          )}
+        >
+          {task.comments.map((comment) => (
+            <div className="comments_all_comment">
+              <div className="comments_all_comment_top">
+                <div className="user-image">JS</div>
+                <div
+                  className={theme === "dark" ? "user-name-d" : "user-name-l"}
+                >
+                  User name
                 </div>
-                <div className="comments_all_comment_bottom">{comment.text}</div>
+                <div className="circle"></div>
+                <div
+                  className={
+                    theme === "dark" ? "comment-date-d" : "comment-date-l"
+                  }
+                >
+                  81 minutes ago
+                </div>
               </div>
-            )) 
-          }
+              <div
+                className={
+                  theme === "dark"
+                    ? "comments_all_comment_bottom-d"
+                    : "comments_all_comment_bottom-l"
+                }
+              >
+                {comment.text}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className={clsx("comment")}>
-          <div className={addComment ? "addComment" : ""}>
+        <div className={theme === "dark" ? "comment-d" : "comment-l"}>
+          <div
+            className={clsx(
+              addComment ? "addComment" : "",
+              theme === "dark" ? "addComment-d" : "addComment-l"
+            )}
+          >
             <textarea
-              className="addCommentTextarea"
+              className={
+                theme === "dark"
+                  ? "addCommentTextarea-d"
+                  : "addCommentTextarea-l"
+              }
               placeholder="Add a comment"
               value={commentText}
               onChange={(e) => handleChangeAddComment(e)}
@@ -279,7 +430,13 @@ const TaskDetail = ({ task, project, close }) => {
             ></textarea>
             {addComment ? (
               <div className="addComment_add">
-                <div className="addComment_add_left">
+                <div
+                  className={
+                    theme === "dark"
+                      ? "addComment_add_left-d"
+                      : "addComment_add_left-l"
+                  }
+                >
                   <div>
                     <PlusIcon />
                   </div>
@@ -298,7 +455,9 @@ const TaskDetail = ({ task, project, close }) => {
                 </div>
                 <div className="addComment_add_right">
                   <button
-                    className="success-btn"
+                    className={
+                      theme === "dark" ? "success-btn" : "success-btn-l"
+                    }
                     onClick={(e) => handleAddComment(e)}
                   >
                     Comment

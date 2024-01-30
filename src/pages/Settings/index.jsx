@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useThemeContext } from "../../context/ThemeContext";
 import Tabs from "../../components/UI/Tabs";
 import EditIcon from "../../assets/icons/EditIcon";
 import SettingProfile from "./components/SettingProfile";
 import SettingNotification from "./components/SettingNotification";
 import SettingTime from "./components/SettingTime";
 import "./Settings.scss";
+import clsx from "clsx";
 
 const Settings = () => {
+  const { theme } = useThemeContext();
   const tabs = [
     { id: 1, title: "Profile", value: "Profile" },
     { id: 2, title: "Time", value: "Time" },
@@ -25,8 +28,17 @@ const Settings = () => {
 
   return (
     <div className="settings">
-      <div className="settings_content">
-        <div className="settings_content_title">Setting</div>
+      <div
+        className={theme === "dark" ? "settings_content" : "settings_content-l"}
+      >
+        <div
+          className={clsx(
+            "settings_content_title",
+            theme === "dark" ? "page-title" : "page-title-l"
+          )}
+        >
+          Setting
+        </div>
         <div className="settings_content_top">
           <Tabs
             list={tabs}
@@ -34,7 +46,10 @@ const Settings = () => {
             onSelect={selectTab}
             variant={"underline"}
           />
-          <div className="gray" onClick={toggleEdit}>
+          <div
+            className={theme === "dark" ? "gray" : "gray-l"}
+            onClick={toggleEdit}
+          >
             <EditIcon />
           </div>
         </div>
@@ -45,9 +60,7 @@ const Settings = () => {
           {active === tabs[1].value ? (
             <SettingTime edit={edit} toggleEdit={toggleEdit} />
           ) : null}
-          {active === tabs[2].value ? (
-            <SettingNotification />
-          ) : null}
+          {active === tabs[2].value ? <SettingNotification /> : null}
         </div>
       </div>
     </div>

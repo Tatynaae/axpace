@@ -1,9 +1,18 @@
+.bordered-input-l {
+  border: 1px solid #d4d8db;
+  color: #1e1f21;
+}
+
 .bordered-input {
-  border-radius: 8px;
+  color: #fafafa;
   border: 1px solid #2c3236;
+}
+
+.bordered-input,
+.bordered-input-l {
+  border-radius: 8px;
   background: transparent;
   padding: 8px 12px;
-  color: #fafafa;
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-weight: 400;

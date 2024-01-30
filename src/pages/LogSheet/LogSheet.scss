@@ -14,10 +14,33 @@
     margin: 20px 0 40px 0;
   }
 
+  &_card-l {
+    border: 1px solid #d4d8db;
+    background: #eef0f5;
+
+    &_time {
+      color: #666a6e;
+      > span {
+        color: #1e1f21;
+      }
+    }
+  }
+
   &_card {
-    border-radius: 16px;
     border: 1px solid #2c3236;
     background: #25272c;
+
+    &_time {
+      color: #88949b;
+      > span {
+        color: #fafafa;
+      }
+    }
+  }
+
+  &_card,
+  &_card-l {
+    border-radius: 16px;
     width: 264px;
     height: 139px;
     flex-shrink: 0;
@@ -30,13 +53,11 @@
     overflow: hidden;
 
     &_time {
-      color: #88949b;
       font-family: Inter;
       font-size: 18px;
       font-weight: 400;
 
       > span {
-        color: #fafafa;
         font-family: Inter;
         font-size: 32px;
         font-weight: 400;
@@ -47,20 +68,39 @@
   &_lists {
     width: 100%;
 
+    &_title-l {
+      color: #1e1f21;
+    }
     &_title {
       color: #fafafa;
+    }
+    &_title,
+    &_title-l {
       font-family: Inter;
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 20px;
     }
-    &_list {
-      width: 100%;
-      border-top: 1px solid #2c3236;
 
+    &_list {
+      border-top: 1px solid #2c3236;
+    }
+    &_list-l {
+      border-top: 1px solid #d4d8db;
+    }
+    &_list,
+    &_list-l {
+      width: 100%;
+
+      .row-l {
+        border-bottom: 1px solid #d4d8db;
+      }
       .row {
-        width: 100%;
         border-bottom: 1px solid #2c3236;
+      }
+      .row,
+      .row-l {
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
         grid-template-rows: 1fr;
@@ -72,7 +112,7 @@
           padding: 16px 0 16px 50px;
           font-family: Inter;
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 400;
           letter-spacing: -0.176px;
 
           .edit {

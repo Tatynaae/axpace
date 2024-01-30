@@ -25,6 +25,12 @@
     }
     .month-t {
       color: #fafafa;
+    }
+    .month-t-l {
+      color: #1e1f21;
+    }
+    .month-t,
+    .month-t-l {
       font-family: Inter;
       font-size: 16px;
       font-weight: 500;
@@ -40,14 +46,29 @@
       cursor: pointer;
     }
   }
-
+  &_week-l {
+    border-top: 1px solid #d4d8db;
+    .row {
+      border-bottom: 1px solid #d4d8db;
+      transition: 0.2s;
+      &:hover {
+        background: #eef0f5;
+      }
+    }
+  }
   &_week {
-    width: 100%;
     border-top: 1px solid #2c3236;
+    .row {
+      border-bottom: 1px solid #2c3236;
+    }
+  }
+
+  &_week,
+  &_week-l {
+    width: 100%;
 
     .row {
       width: 100%;
-      border-bottom: 1px solid #2c3236;
       display: flex;
       align-items: center;
 
@@ -71,10 +92,18 @@
 }
 
 .edit-timesheet {
-  border-radius: 12px;
   border: 1px solid #2c3236;
   background: #0e1112;
   box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
+}
+.edit-timesheet-l {
+  border: 1px solid #d4d8db;
+  background: #fff;
+  box-shadow: 0px 4px 24px 0px rgba(95, 95, 95, 0.32);
+}
+.edit-timesheet,
+.edit-timesheet-l {
+  border-radius: 12px;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -94,6 +123,11 @@
     .close {
       cursor: pointer;
     }
+    > span {
+      font-family: Inter;
+      font-size: 20px;
+      font-weight: 400;
+    }
   }
 
   &_second {
@@ -106,7 +140,32 @@
     }
   }
 
+  &_second-l {
+    > span {
+      color: #666a6e;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+
   &_third {
+    > * {
+      > span {
+        color: #88949b;
+      }
+    }
+  }
+  &_third-l {
+    > * {
+      > span {
+        color: #666a6e;
+      }
+    }
+  }
+  &_third,
+  &_third-l {
     display: flex;
     align-items: center;
     gap: 24px;
@@ -114,7 +173,6 @@
       width: 49%;
 
       > span {
-        color: #88949b;
         font-family: Inter;
         font-size: 14px;
         font-weight: 400;
