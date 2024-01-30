@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import clsx from "clsx";
 import { useThemeContext } from "../../../../context/ThemeContext";
 import Overlay from "../../../../components/Overlay";
 import CloseIcon from "../../../../assets/icons/CloseIcon";
@@ -27,23 +28,41 @@ const InviteMember = ({ project }) => {
       </button>
       {overlay ? (
         <Overlay close={toggleOverlay}>
-          <div className="invite">
+          <div
+            className={clsx(
+              "invite",
+              theme === "dark" ? "invite-d" : "invite-l"
+            )}
+          >
             <div className="invite_top">
-              <span>Add members</span>
-              <div onClick={toggleOverlay}>
+              <span
+                className={theme === "dark" ? "page-title" : "page-title-l"}
+              >
+                Add members
+              </span>
+              <div
+                className={theme === "dark" ? "gray" : "gray-l"}
+                onClick={toggleOverlay}
+              >
                 <CloseIcon />
               </div>
             </div>
 
             <div className="invite_inviting">
-              <span>Invite via email</span>
+              <span className={theme === "dark" ? "gray" : "gray-l"}>
+                Invite via email
+              </span>
               <div className="invite_inviting_email">
                 <BorderedInput
                   type={"email"}
                   placeholder="Email"
                   className={"email-in"}
                 />
-                <button className="success-btn">Invite</button>
+                <button
+                  className={theme === "dark" ? "success-btn" : "success-btn-l"}
+                >
+                  Invite
+                </button>
               </div>
             </div>
 
@@ -57,7 +76,7 @@ const InviteMember = ({ project }) => {
                       <MemberIcon />
                     )}
                   </div>
-                  <div className="exist-member_name">{member.name}</div>
+                  <div className={clsx("exist-member_name", theme === "dark" ? "gray" : "gray-l")}>{member.name}</div>
                 </div>
               ))}
             </div>

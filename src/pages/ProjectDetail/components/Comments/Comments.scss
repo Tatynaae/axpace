@@ -1,14 +1,21 @@
 .comments-comp {
   width: 100%;
-  padding: 40px 40px 0 0;
+  padding: 40px 40px 40px 0;
   display: flex;
   align-items: center;
   justify-content: center;
 
+  &_container-l {
+    border: 1px solid #d4d8db;
+    background: #eef0f5;
+  }
   &_container {
+    background: #25272c;
+  }
+  &_container,
+  &_container-l {
     width: 100%;
     border-radius: 12px;
-    background: #25272c;
   }
   &_all {
     width: 100%;
@@ -44,9 +51,16 @@
           font-family: Inter;
           font-size: 12px;
           font-weight: 400;
+          border-radius: 50%;
+        }
+        .user-name-l {
+          color: #1e1f21;
         }
         .user-name {
           color: #fafafa;
+        }
+        .user-name,
+        .user-name-l {
           font-family: Inter;
           font-size: 14px;
           font-weight: 500;
@@ -65,9 +79,15 @@
         }
       }
 
+      &_bottom-l {
+        color: #1e1f21;
+      }
       &_bottom {
-        width: 100%;
         color: #88949b;
+      }
+      &_bottom,
+      &_bottom-l {
+        width: 100%;
         font-family: Inter;
         font-size: 14px;
         font-weight: 400;
@@ -79,39 +99,62 @@
     width: 100%;
     padding: 16px 24px;
 
+    .addCommentTextarea-d {
+      border: 1px solid #2c3236;
+      color: #ffffff;
+      background: transparent;
+    }
+    .addCommentTextarea-l {
+      border: 1px solid #d4d8db;
+      color: #1e1f21;
+      background: #fafafa;
+    }
     .addCommentTextarea {
       width: 100%;
       resize: none;
-      background: transparent;
       border-radius: 8px;
-      border: 1px solid #2c3236;
       padding: 8px 12px;
       outline: none;
-      color: #ffffff;
       font-family: Inter;
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
     }
+
+    .addComment-l {
+      border: 1px solid #d4d8db;
+      background: #fafafa;
+    }
     .addComment {
+      border: 1px solid #88949b;
+      background: transparent;
+    }
+    .addComment,
+    .addComment-l {
       border-radius: 8px;
-      border: 1px solid var(--grey, #88949b);
-      background: var(--Color_background, #1e2024);
       width: 100%;
       padding: 12px;
 
+      .addCommentTextarea-d {
+        border: none;
+        color: #ffffff;
+        background: transparent;
+      }
+      .addCommentTextarea-l {
+        border: none;
+        color: #1e1f21;
+        background: transparent;
+      }
       .addCommentTextarea {
         width: 100%;
         resize: none;
-        background: transparent;
         border-radius: 8px;
+        padding: 8px 12px;
         outline: none;
-        color: #ffffff;
         font-family: Inter;
         font-size: 16px;
         font-weight: 400;
         line-height: 24px;
-        border: none;
       }
 
       &_add {
@@ -120,15 +163,23 @@
         align-items: center;
         justify-content: space-between;
 
+        &_left-l {
+          > * {
+            color: #666a6e;
+            cursor: pointer;
+          }
+        }
         &_left {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-
           > * {
             color: #88949b;
             cursor: pointer;
           }
+        }
+        &_left,
+        &_left-l {
+          display: flex;
+          align-items: center;
+          gap: 16px;
         }
       }
     }

@@ -11,28 +11,27 @@
     align-items: center;
     justify-content: end;
     padding: 16px 0 16px 0;
-
-    > button {
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      color: #88949b;
-      font-family: Inter;
-      font-size: 16px;
-      font-weight: 500;
-      padding: 6px 40px;
-    }
   }
 
   &_list {
     width: 100%;
 
+    &-head-l {
+      border-top: 1px solid #d4d8db;
+      border-bottom: 1px solid #d4d8db;
+      > * {
+        color: #666a6e;
+      }
+    }
     &-head {
       border-top: 1px solid #2c3236;
       border-bottom: 1px solid #2c3236;
+      > * {
+        color: #88949b;
+      }
+    }
+    &-head,
+    &-head-l {
       display: flex;
       align-items: center;
 
@@ -42,7 +41,6 @@
 
       > * {
         width: 158px;
-        color: #88949b;
         font-family: Inter;
         font-size: 16px;
         font-weight: 500;
@@ -58,10 +56,24 @@
       width: 100%;
     }
 
+    &-element-l {
+      border-bottom: 1px solid #d4d8db;
+      > * {
+        color: #1e1f21;
+      }
+    }
     &-element {
+      border-bottom: 1px solid #2c3236;
+      > * {
+        color: #fafafa;
+      }
+    }
+    &-element,
+    &-element-l {
       width: 100%;
       display: flex;
       align-items: center;
+
       .doublepoints {
         width: 30px;
         position: relative;
@@ -73,7 +85,6 @@
 
       > * {
         width: 158px;
-        color: #fafafa;
         font-family: Inter;
         font-size: 16px;
         font-weight: 500;
@@ -91,7 +102,22 @@
   }
 }
 
-.create-milestone {
+.c-m-l {
+  border-radius: 12px;
+  border: 1px solid #d4d8db;
+  background: #fff;
+  box-shadow: 0px 4px 24px 0px rgba(95, 95, 95, 0.32);
+}
+
+.c-m-d {
+  border: 1px solid #2c3236;
+  background: #0e1112;
+  box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
+}
+
+.create-milestone,
+.c-m-l,
+.c-m-d {
   display: flex;
   width: 552px;
   padding: 24px;
@@ -99,16 +125,12 @@
   align-items: flex-start;
   gap: 24px;
   border-radius: 12px;
-  border: 1px solid #2c3236;
-  background: #0e1112;
-  box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
 
   > * {
     display: flex;
     width: 100%;
     gap: 4px;
     .bl-title {
-      color: #88949b;
       font-family: Inter;
       font-size: 14px;
       font-weight: 500;
@@ -118,7 +140,8 @@
   &_first {
     align-items: center;
     justify-content: space-between;
-    .gray {
+    .gray,
+    .gray-l {
       cursor: pointer;
     }
   }
@@ -146,15 +169,21 @@
   &_fours {
     align-items: self-start;
     flex-direction: column;
+    .desc-t {
+      border: 1px solid #2c3236;
+      color: #fafafa;
+    }
+    .desc-t-l {
+      border: 1px solid #d4d8db;
+      color: #1e1f21;
+    }
     > textarea {
       resize: none;
       width: 100%;
       background: transparent;
       border-radius: 8px;
-      border: 1px solid #2c3236;
       display: flex;
       padding: 8px 12px;
-      color: #fafafa;
       font-family: "Open Sans";
       font-size: 14px;
       font-weight: 400;

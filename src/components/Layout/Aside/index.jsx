@@ -58,7 +58,7 @@ const Aside = () => {
   const selectNav = (item) => {
     setSelected(item);
     navigate(item);
-    window.scroll(0,0)
+    window.scroll(0, 0);
   };
 
   return (
@@ -90,18 +90,20 @@ const Aside = () => {
               onClick={() => selectNav(item.path)}
             >
               <span
-                className={
+                className={clsx(
                   selected === item.path &&
-                  (theme === "light" ? "dark-selected" : "light-selected")
-                }
+                    (theme === "light" ? "dark-selected" : "light-selected"),
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
               >
                 {item.icon}
               </span>
               <span
-                className={
+                className={clsx(
                   selected === item.path &&
-                  (theme === "light" ? "dark-selected" : "light-selected")
-                }
+                    (theme === "light" ? "dark-selected" : "light-selected"),
+                  theme === "dark" ? "gray" : "gray-l"
+                )}
               >
                 {item.title}
               </span>

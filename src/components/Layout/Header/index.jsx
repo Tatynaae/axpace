@@ -46,7 +46,7 @@ const Header = () => {
     setMinutes(0);
     setHours(0);
     setIsRunning(false);
-    setReset(false)
+    setReset(false);
   };
 
   useEffect(() => {
@@ -112,10 +112,19 @@ const Header = () => {
           ) : null}
         </div>
         <div className={"header_right"}>
-          <div className="theme" onClick={changeTheme}>
+          <div
+            className={clsx("theme", theme === "dark" ? "gray" : "gray-l")}
+            onClick={changeTheme}
+          >
             <ThemeDarkIcon />
           </div>
-          <div className="notification" onClick={toggleOverlay}>
+          <div
+            className={clsx(
+              "notification",
+              theme === "dark" ? "gray" : "gray-l"
+            )}
+            onClick={toggleOverlay}
+          >
             <BellIcon />
           </div>
           <div className="profile">

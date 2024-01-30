@@ -6,25 +6,39 @@
   height: 100%;
 
   &_container {
-    width: 591px;
-    position: absolute;
-    right: 0;
-    top: 0;
     border-bottom: 1px solid #2c3236;
     border-left: 1px solid #2c3236;
     background: #1e2024;
     box-shadow: 0px 4px 32px 0px rgba(8, 9, 9, 0.4);
   }
+  &_container-l {
+    border-bottom: 1px solid #d4d8db;
+    border-left: 1px solid #d4d8db;
+    background: #fafdff;
+    box-shadow: 0px 4px 24px 0px rgba(95, 95, 95, 0.32);
+  }
+  &_container,
+  &_container-l {
+    width: 591px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 
+  &_top-l {
+    border-bottom: 1px solid #d4d8db;
+  }
   &_top {
+    border-bottom: 1px solid #2c3236;
+  }
+  &_top,
+  &_top-l {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #2c3236;
     padding: 13px 24px;
     > span {
-      color: #fafafa;
       font-family: Inter;
       font-size: 24px;
       font-weight: 400;
@@ -60,14 +74,20 @@
       gap: 24px;
     }
 
+    &_not-l {
+      border-bottom: 1px solid #d4d8db;
+    }
     &_not {
+      border-bottom: 1px solid #2c3236;
+    }
+    &_not,
+    &_not-l {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: self-start;
       gap: 12px;
       padding: 0 24px 24px 24px;
-      border-bottom: 1px solid #2c3236;
 
       &_top {
         width: 100%;
@@ -96,6 +116,22 @@
             font-weight: 400;
           }
 
+          .name-l {
+            color: #1e1f21;
+          }
+          .name-d {
+            color: #fafafa;
+          }
+
+          .name-d,
+          .name-l {
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
+
           .circle {
             height: 4px;
             width: 4px;
@@ -111,8 +147,15 @@
           }
         }
       }
+
       &_bot {
         color: #fafafa;
+      }
+      &_bot-l {
+        color: #1e1f21;
+      }
+      &_bot,
+      &_bot-l {
         font-family: Inter;
         font-size: 14px;
         font-weight: 400;

@@ -241,7 +241,7 @@ const ProjectDetail = () => {
               onSelect={setContent}
             />
           </div>
-          <div className="second_section__right" onClick={toggleFilter}>
+          <div className={theme === 'dark' ? "second_section__right" : "second_section__right-l"} onClick={toggleFilter}>
             <FilterIcon />
             <span>Filter</span>
             {filter ? (

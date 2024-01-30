@@ -118,16 +118,25 @@
     justify-content: space-between;
     position: relative;
 
-    &__right {
+    &__right{
+      > * {
+        color: #88949b;
+        position: relative;
+      }
+    }
+    &__right-l{
+      > * {
+        color: #666A6E;
+        position: relative;
+      }
+    }
+    &__right, &__right-l {
       display: flex;
       align-items: center;
       gap: 8px;
       cursor: pointer;
 
-      > * {
-        color: #88949b;
-        position: relative;
-      }
+      
 
       &_filter {
         width: 166px;

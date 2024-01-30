@@ -109,3 +109,24 @@ a {
 .dark-white {
   color: #1e1f21;
 }
+
+.create-btn {
+  color: #88949b;
+}
+.create-btn-l {
+  color: #666a6e;
+}
+
+.create-btn,
+.create-btn-l {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 6px 40px;
+}
