@@ -170,23 +170,6 @@
     }
 
     &_left {
-      .status-d,
-      .status-l {
-        border-radius: 12px;
-        font-family: Inter;
-        font-size: 12px;
-        font-weight: 400;
-        color: #c5850a;
-      }
-
-      .status-d {
-        background: #403624;
-      }
-
-      .status-l {
-        background: rgba(197, 133, 10, 0.14);
-      }
-
       .priority {
         color: #19893f;
         font-family: Inter;

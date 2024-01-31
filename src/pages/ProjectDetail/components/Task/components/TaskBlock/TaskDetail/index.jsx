@@ -3,8 +3,10 @@ import clsx from "clsx";
 import { useMyProjectsContext } from "../../../../../../../context/MyProjectsContext";
 import { useThemeContext } from "../../../../../../../context/ThemeContext";
 import PlusIcon from "../../../../../../../assets/icons/PlusIcon";
+import Status from "../../../../../../../components/UI/Status";
 import MinusIcon from "../../../../../../../assets/icons/MinusIcon";
 import SmileIcon from "../../../../../../../assets/icons/SmileIcon";
+import ModalList from "../../../../../../../components/UI/ModalList";
 import AttachIcon from "../../../../../../../assets/icons/AttachIcon";
 import MemberIcon from "../../../../../../../assets/icons/MemberIcon";
 import ForwardIcon from "../../../../../../../assets/icons/ForwardIcon";
@@ -19,12 +21,13 @@ import "./TaskDetail.scss";
 const TaskDetail = ({ task, project, close }) => {
   const subtaskRef = useRef();
   const { theme } = useThemeContext();
-  const { setProjects, addCommentToTask } = useMyProjectsContext();
+  const { setProjects, addCommentToTask, setTaskStatus } =
+    useMyProjectsContext();
   const [subTask, setSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
   const [stageModal, setStageModal] = useState(false);
   const [priorityModal, setPriorityModal] = useState(false);
-  const [stageContent, setStageContent] = useState(<MinusIcon />);
+  // const [stageContent, setStageContent] = useState(<MinusIcon />);
   const [priorityContent, setPriorityContent] = useState(<MinusIcon />);
   const [addComment, setAddComment] = useState(false);
   const [commentText, setCommentText] = useState("");
@@ -91,10 +94,27 @@ const TaskDetail = ({ task, project, close }) => {
     { title: "High" },
   ];
 
-  const stageList = [
-    { title: "todo" },
-    { title: "doing" },
-    { title: "completed" },
+  const statusList = [
+    {
+      title: "On track",
+      element: <Status text={"On track"} />,
+      function: () => setTaskStatus(project.id, task.id, "On track"),
+    },
+    {
+      title: "At risk",
+      element: <Status text={"At risk"} />,
+      function: () => setTaskStatus(project.id, task.id, "At risk"),
+    },
+    {
+      title: "Off track",
+      element: <Status text={"Off track"} />,
+      function: () => setTaskStatus(project.id, task.id, "Off track"),
+    },
+    {
+      title: "On hold",
+      element: <Status text={"On hold"} />,
+      function: () => setTaskStatus(project.id, task.id, "On hold"),
+    },
   ];
 
   const togglePriorityModal = () => {
@@ -105,9 +125,6 @@ const TaskDetail = ({ task, project, close }) => {
   };
   const toggleStageModal = () => {
     setStageModal(!stageModal);
-  };
-  const setStage = (content) => {
-    setStageContent((prevContent) => content);
   };
 
   const handleFocusAddComment = () => {
@@ -313,14 +330,10 @@ const TaskDetail = ({ task, project, close }) => {
               }
               onClick={toggleStageModal}
             >
-              {stageContent}
+              {task.status ? <Status text={task.status} /> : <MinusIcon />}
               {stageModal ? (
                 <div className="modal" onMouseLeave={toggleStageModal}>
-                  {stageList.map((el) => (
-                    <div className="modal_elem2">
-                      <span onClick={() => setStage(el.title)}>{el.title}</span>
-                    </div>
-                  ))}
+                  <ModalList list={statusList} />
                 </div>
               ) : null}
             </div>

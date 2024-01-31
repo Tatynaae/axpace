@@ -173,7 +173,8 @@ const ProjectDetail = () => {
         tasks: getTasks(project.id, section.sectionTitle.toLowerCase()),
       }));
     });
-  }, [projects, project.id, getTasks]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projects, project.id]);
 
   const handleArchiveProject = () => {
     archiveProject(project.id);
@@ -241,7 +242,14 @@ const ProjectDetail = () => {
               onSelect={setContent}
             />
           </div>
-          <div className={theme === 'dark' ? "second_section__right" : "second_section__right-l"} onClick={toggleFilter}>
+          <div
+            className={
+              theme === "dark"
+                ? "second_section__right"
+                : "second_section__right-l"
+            }
+            onClick={toggleFilter}
+          >
             <FilterIcon />
             <span>Filter</span>
             {filter ? (
@@ -280,7 +288,11 @@ const ProjectDetail = () => {
                 ref={addInputRef}
                 required
                 placeholder="Placeholder_input"
-                className={theme === 'dark' ? "third_section__addInput-d" : 'third_section__addInput-l'}
+                className={
+                  theme === "dark"
+                    ? "third_section__addInput-d"
+                    : "third_section__addInput-l"
+                }
                 onChange={(e) => handleAddSection(e)}
                 onKeyDown={(e) => handleClickAddInput(e, Index)}
                 onBlur={handleBlurAddInput}

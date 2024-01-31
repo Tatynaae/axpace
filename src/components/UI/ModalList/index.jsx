@@ -21,7 +21,7 @@ const ModalList = ({ list }) => {
           onClick={el?.function}
           onMouseOver={el.hover}
         >
-          {el.title || el.sectionTitle}
+          {el.element ? el.element : el.title || el.sectionTitle}
           {el.icon ? el.icon : null}
         </div>
       ))}

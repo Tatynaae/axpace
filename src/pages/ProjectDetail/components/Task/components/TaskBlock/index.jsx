@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Assign from "../Assign";
 import TaskDetail from "./TaskDetail";
 import Overlay from "../../../../../../components/Overlay";
+import Status from "../../../../../../components/UI/Status";
 import ModalList from "../../../../../../components/UI/ModalList";
 import PointsIcon from "../../../../../../assets/icons/PointsIcon";
 import SharedIcon from "../../../../../../assets/icons/SharedIcon";
@@ -112,20 +113,20 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
               {editModal && (
                 <div className="list">
                   <ModalList list={setList} />
-                  {move && (<div className="second-list"><ModalList list={sections}/></div> )}
+                  {move && (
+                    <div className="second-list">
+                      <ModalList list={sections} />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           )}
         </div>
-        {(task.stage || task.priority) && (
+        {(task.status || task.priority) && (
           <div className="block_first">
             <div className="block_first_left">
-              {task.stage ? (
-                <div className={theme === "dark" ? "status-d" : "status-l"}>
-                  {task.stage}
-                </div>
-              ) : null}
+              {task.status ? <Status text={task.status} /> : null}
               {task.priority ? (
                 <div className="priority">{task.priority}</div>
               ) : null}

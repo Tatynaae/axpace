@@ -30,6 +30,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "todo",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -46,6 +47,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "doing",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -62,6 +64,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "completed",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -78,6 +81,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "completed",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -107,6 +111,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "todo",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -123,6 +128,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "doing",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -139,6 +145,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "completed",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -168,6 +175,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "todo",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -184,6 +192,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "doing",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -200,6 +209,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "doing",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -216,6 +226,7 @@ export const MyProjectsProvider = ({ children }) => {
           assign: "JS",
           stage: "completed",
           priority: "priority",
+          status: null,
           comments: [
             {
               id: 1,
@@ -278,7 +289,24 @@ export const MyProjectsProvider = ({ children }) => {
             }
             return task;
           });
-  
+
+          return { ...project, tasks: updatedTasks };
+        }
+        return project;
+      })
+    );
+  };
+  const setTaskStatus = (projectId, taskId, status) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) => {
+        if (project.id === projectId) {
+          const updatedTasks = project.tasks.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, status: status };
+            }
+            return task;
+          });
+
           return { ...project, tasks: updatedTasks };
         }
         return project;
@@ -296,7 +324,8 @@ export const MyProjectsProvider = ({ children }) => {
         archiveProject,
         starProject,
         nonStarProject,
-        addCommentToTask
+        addCommentToTask,
+        setTaskStatus,
       }}
     >
       {children}
