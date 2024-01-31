@@ -21,13 +21,12 @@ import "./TaskDetail.scss";
 const TaskDetail = ({ task, project, close }) => {
   const subtaskRef = useRef();
   const { theme } = useThemeContext();
-  const { setProjects, addCommentToTask, setTaskStatus } =
+  const { setProjects, addCommentToTask, setTaskStatus, setTaskPriority } =
     useMyProjectsContext();
   const [subTask, setSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
   const [stageModal, setStageModal] = useState(false);
   const [priorityModal, setPriorityModal] = useState(false);
-  // const [stageContent, setStageContent] = useState(<MinusIcon />);
   const [priorityContent, setPriorityContent] = useState(<MinusIcon />);
   const [addComment, setAddComment] = useState(false);
   const [commentText, setCommentText] = useState("");
@@ -89,9 +88,21 @@ const TaskDetail = ({ task, project, close }) => {
   }, [subTask]);
 
   const priorityList = [
-    { title: "Low" },
-    { title: "Medium" },
-    { title: "High" },
+    {
+      title: "Low",
+      element: <Status text={"Low"} />,
+      function: () => setTaskPriority(project.id, task.id, "Low"),
+    },
+    {
+      title: "Medium",
+      element: <Status text={"Medium"} />,
+      function: () => setTaskPriority(project.id, task.id, "Medium"),
+    },
+    {
+      title: "High",
+      element: <Status text={"High"} />,
+      function: () => setTaskPriority(project.id, task.id, "High"),
+    },
   ];
 
   const statusList = [
@@ -295,19 +306,10 @@ const TaskDetail = ({ task, project, close }) => {
               }
               onClick={togglePriorityModal}
             >
-              {priorityContent}
+              {task.priority ? <Status text={task.priority} /> : <MinusIcon />}
               {priorityModal ? (
                 <div className="modal" onMouseLeave={togglePriorityModal}>
-                  {priorityList.map((el, idx) => (
-                    <div className="modal_elem" key={idx}>
-                      <span
-                        className={el.title.toLowerCase()}
-                        onClick={() => setPriority(el.title)}
-                      >
-                        {el.title}
-                      </span>
-                    </div>
-                  ))}
+                  <ModalList list={priorityList} />
                 </div>
               ) : null}
             </div>

@@ -29,7 +29,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "todo",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -46,7 +46,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "doing",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -63,7 +63,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "completed",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -80,7 +80,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "completed",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -110,7 +110,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "todo",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -127,7 +127,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "doing",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -144,7 +144,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "completed",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -174,7 +174,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "todo",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -191,7 +191,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "doing",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -208,7 +208,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "doing",
-          priority: "priority",
+          priority:null,
           status: null,
           comments: [
             {
@@ -225,7 +225,7 @@ export const MyProjectsProvider = ({ children }) => {
           date: "Oct 4-7",
           assign: "JS",
           stage: "completed",
-          priority: "priority",
+          priority: null,
           status: null,
           comments: [
             {
@@ -313,6 +313,23 @@ export const MyProjectsProvider = ({ children }) => {
       })
     );
   };
+  const setTaskPriority = (projectId, taskId, priority) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) => {
+        if (project.id === projectId) {
+          const updatedTasks = project.tasks.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, priority: priority };
+            }
+            return task;
+          });
+
+          return { ...project, tasks: updatedTasks };
+        }
+        return project;
+      })
+    );
+  };
 
   return (
     <myProjects.Provider
@@ -326,6 +343,7 @@ export const MyProjectsProvider = ({ children }) => {
         nonStarProject,
         addCommentToTask,
         setTaskStatus,
+        setTaskPriority
       }}
     >
       {children}
