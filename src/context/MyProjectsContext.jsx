@@ -28,7 +28,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 1,
           date: "Oct 4-7",
           assign: "JS",
-          status: "todo",
+          stage: "todo",
           priority: "priority",
           comments: [
             {
@@ -44,7 +44,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 2,
           date: "Oct 4-7",
           assign: "JS",
-          status: "doing",
+          stage: "doing",
           priority: "priority",
           comments: [
             {
@@ -60,7 +60,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 3,
           date: "Oct 4-7",
           assign: "JS",
-          status: "completed",
+          stage: "completed",
           priority: "priority",
           comments: [
             {
@@ -76,7 +76,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 4,
           date: "Oct 4-7",
           assign: "JS",
-          status: "completed",
+          stage: "completed",
           priority: "priority",
           comments: [
             {
@@ -105,7 +105,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 1,
           date: "Oct 4-7",
           assign: "JS",
-          status: "todo",
+          stage: "todo",
           priority: "priority",
           comments: [
             {
@@ -121,7 +121,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 2,
           date: "Oct 4-7",
           assign: "JS",
-          status: "doing",
+          stage: "doing",
           priority: "priority",
           comments: [
             {
@@ -137,7 +137,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 3,
           date: "Oct 4-7",
           assign: "JS",
-          status: "completed",
+          stage: "completed",
           priority: "priority",
           comments: [
             {
@@ -166,7 +166,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 1,
           date: "Oct 4-7",
           assign: "JS",
-          status: "todo",
+          stage: "todo",
           priority: "priority",
           comments: [
             {
@@ -182,7 +182,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 2,
           date: "Oct 4-7",
           assign: "JS",
-          status: "doing",
+          stage: "doing",
           priority: "priority",
           comments: [
             {
@@ -198,7 +198,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 3,
           date: "Oct 4-7",
           assign: "JS",
-          status: "doing",
+          stage: "doing",
           priority: "priority",
           comments: [
             {
@@ -214,7 +214,7 @@ export const MyProjectsProvider = ({ children }) => {
           id: 4,
           date: "Oct 4-7",
           assign: "JS",
-          status: "completed",
+          stage: "completed",
           priority: "priority",
           comments: [
             {
@@ -261,10 +261,10 @@ export const MyProjectsProvider = ({ children }) => {
       )
     );
   };
-  const getTasks = (status) => {
+  const getTasks = (stage) => {
     return projects.map((project) => ({
       ...project,
-      tasks: project.tasks.filter((task) => task.status === status),
+      tasks: project.tasks.filter((task) => task.stage === stage),
     }));
   };
   const addCommentToTask = (projectId, taskId, newComment) => {

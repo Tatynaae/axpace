@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useThemeContext } from "../../../../context/ThemeContext";
 import Tabs from "../../../../components/UI/Tabs";
+import Months from "../../../../components/UI/Months";
 import "./Activities.scss";
 
 const activities = [
@@ -21,8 +22,14 @@ const activities = [
   {
     title: "Monthly",
     value: "Monthly",
+    activity: 31,
   },
 ];
+
+let daysOfMonth = [];
+for (let i = 1; i < 32; i++) {
+  daysOfMonth.push(i);
+}
 
 const Activities = () => {
   const { theme } = useThemeContext();
@@ -44,58 +51,83 @@ const Activities = () => {
         onSelect={handleActive}
         isActive={isActive}
       />
-      <div className="all-activities">
-        {activities[0].activity.map((el, idx) => {
-          const timeInHours = parseTimeToHours(el.time);
-          const percentageHeight = (timeInHours / 30.1667) * 100;
+      {isActive === "Weekly" ? (
+        <div className="all-activities">
+          {activities[0].activity.map((el, idx) => {
+            const timeInHours = parseTimeToHours(el.time);
+            const percentageHeight = (timeInHours / 30.1667) * 100;
 
-          const style =
-            el.time === "0"
-              ? {
-                  height: "190px",
-                  background: theme === "dark" ? "#2C3236" : "#D4D8DB",
-                }
-              : {
-                  height: `${percentageHeight}%`,
-                  background: theme === "dark" ? "#2A57C8" : "#4683F7",
-                };
-          return (
-            <div className="activity" key={idx}>
-              <div className="activity-time">
-                <span
-                  className={
-                    theme === "dark"
-                      ? "activity-time_dark"
-                      : "activity-time_light"
+            const style =
+              el.time === "0"
+                ? {
+                    height: "190px",
+                    background: theme === "dark" ? "#2C3236" : "#D4D8DB",
                   }
+                : {
+                    height: `${percentageHeight}%`,
+                    background: theme === "dark" ? "#2A57C8" : "#4683F7",
+                  };
+            return (
+              <div className="activity" key={idx}>
+                <div className="activity-time">
+                  <span
+                    className={
+                      theme === "dark"
+                        ? "activity-time_dark"
+                        : "activity-time_light"
+                    }
+                  >
+                    {el.time}
+                  </span>
+                  <div className="activity-sq" style={style}></div>
+                </div>
+                <div
+                  className={"activity-day"}
+                  style={{
+                    borderTop:
+                      theme === "dark"
+                        ? "1px solid #2c3236"
+                        : "1px solid #D4D8DB",
+                  }}
                 >
-                  {el.time}
-                </span>
-                <div className="activity-sq" style={style}></div>
+                  <span
+                    className={
+                      theme === "dark"
+                        ? "activity-day_dark"
+                        : "activity-day_light"
+                    }
+                  >
+                    {el.day}
+                  </span>
+                </div>
               </div>
-              <div
-                className={"activity-day"}
-                style={{
-                  borderTop:
-                    theme === "dark"
-                      ? "1px solid #2c3236"
-                      : "1px solid #D4D8DB",
-                }}
-              >
+            );
+          })}
+        </div>
+      ) : (
+        <div
+        className={
+          theme === "dark" ? "monthly-activities" : "monthly-activities-l"
+        }>
+          <Months />
+          <div className="daysOfMonth">
+            {daysOfMonth.map((day) => (
+              <div className="daysOfMonth_day">
                 <span
-                  className={
-                    theme === "dark"
-                      ? "activity-day_dark"
-                      : "activity-day_light"
-                  }
+                  className={theme === "dark" ? "page-title" : "page-title-l"}
                 >
-                  {el.day}
+                  {day}
                 </span>
+                <div
+                  className={
+                    theme === "dark" ? "daysOfMonth_sq" : "daysOfMonth_sq-l"
+                  }
+                ></div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -1,0 +1,31 @@
+.month {
+  display: flex;
+  align-items: center;
+
+  > span {
+    padding: 0;
+    margin: 0;
+  }
+  &-t {
+    color: #fafafa;
+  }
+  &-t-l {
+    color: #1e1f21;
+  }
+  &-t,
+  &-t-l {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .right-a {
+    > * {
+      transform: rotate(180deg);
+    }
+  }
+  .right-a,
+  .left-a {
+    cursor: pointer;
+  }
+}

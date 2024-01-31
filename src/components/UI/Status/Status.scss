@@ -1,0 +1,32 @@
+@mixin base {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+  gap: 8px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 12px;
+}
+
+.blueStatus {
+  @include base;
+  color: #2a57c8;
+  background: rgba(42, 87, 200, 0.14);
+}
+.yellowStatus {
+  @include base;
+  color: #c5850a;
+  background: rgba(197, 133, 10, 0.14);
+}
+.redStatus {
+  @include base;
+  color: #cc3e4e;
+  background: rgba(204, 62, 78, 0.14);
+}
+.greenStatus {
+  @include base;
+  color: #19893f;
+  background: rgba(25, 137, 63, 0.14);
+}

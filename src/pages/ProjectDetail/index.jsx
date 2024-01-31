@@ -9,8 +9,8 @@ import Tabs from "../../components/UI/Tabs";
 import Comments from "./components/Comments";
 import Overlay from "../../components/Overlay";
 import Milestones from "./components/Milestones";
-import ArrowDown from "../../assets/icons/ArrowDown";
 import InviteMember from "./components/InviteMember";
+import ArrowDown from "../../assets/icons/ArrowDown";
 import AddButton from "../../components/UI/AddButton";
 import ModalList from "../../components/UI/ModalList";
 import FilterIcon from "../../assets/icons/FilterIcon";
@@ -49,9 +49,9 @@ const ProjectDetail = () => {
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getTasks = (projectId, status) => {
+  const getTasks = (projectId, stage) => {
     if (project.id === projectId) {
-      return project.tasks.filter((el) => el.status === status);
+      return project.tasks.filter((el) => el.stage === stage);
     }
 
     return [];
@@ -122,7 +122,7 @@ const ProjectDetail = () => {
       title: taskTitle,
       date: "Oct 4-7",
       assign: "JS",
-      status: curSection.sectionTitle.toLowerCase(),
+      stage: curSection.sectionTitle.toLowerCase(),
       priority: "",
       comments: [],
       subtasks: [],
@@ -173,7 +173,7 @@ const ProjectDetail = () => {
         tasks: getTasks(project.id, section.sectionTitle.toLowerCase()),
       }));
     });
-  }, [projects, project.id]);
+  }, [projects, project.id, getTasks]);
 
   const handleArchiveProject = () => {
     archiveProject(project.id);

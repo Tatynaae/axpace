@@ -1,16 +1,16 @@
 import React, { useState } from "react";
+import clsx from "clsx";
 import { useThemeContext } from "../../context/ThemeContext";
 import TimeCards from "./components/TimeCards";
 import Overlay from "../../components/Overlay";
+import Months from "../../components/UI/Months";
 import RedImg from "../../assets/images/red.png";
 import EditIcon from "../../assets/icons/EditIcon";
 import GreenImg from "../../assets/images/green.png";
 import CloseIcon from "../../assets/icons/CloseIcon";
 import GreenArrow from "../../assets/icons/GreenArrow";
 import BorderedInput from "../../components/UI/BorderedInput";
-import SlideMonthArrowIcon from "../../assets/icons/SlideMonthArrowIcon";
 import "./TimeSheet.scss";
-import clsx from "clsx";
 
 const TimeSheet = () => {
   const { theme } = useThemeContext();
@@ -109,16 +109,8 @@ const TimeSheet = () => {
               <TimeCards element={element} />
             ))}
           </div>
-          <div className="time-sheet_month">
-            <span className="left-a">
-              <SlideMonthArrowIcon />
-            </span>
-            <span className={theme === "dark" ? "month-t" : "month-t-l"}>
-              October
-            </span>
-            <span className="right-a">
-              <SlideMonthArrowIcon />
-            </span>
+          <div className="months-slide">
+            <Months />
           </div>
           <div
             className={

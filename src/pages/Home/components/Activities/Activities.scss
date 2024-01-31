@@ -70,3 +70,54 @@
     }
   }
 }
+.monthly-activities {
+  border-top: 1px solid #2c3236;
+}
+.monthly-activities-l {
+  border-top: 1px solid #d4d8db;
+}
+
+.monthly-activities,
+.monthly-activities-l {
+  width: 100%;
+  padding: 32px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 40px;
+
+  .daysOfMonth {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &_day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9.5px;
+
+      > span {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+    &_sq,
+    &_sq-l {
+      border-radius: 4px;
+      width: 28px;
+      height: 28px;
+    }
+
+    &_sq {
+      border: 1px solid #2a57c8;
+      background: #2a57c8;
+    }
+    &_sq-l {
+      border: 1px solid #4683f7;
+      background: #4683f7;
+    }
+  }
+}

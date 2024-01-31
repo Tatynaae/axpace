@@ -22,9 +22,9 @@ const TaskDetail = ({ task, project, close }) => {
   const { setProjects, addCommentToTask } = useMyProjectsContext();
   const [subTask, setSubTask] = useState(false);
   const [subTaskTitle, setSubTaskTitle] = useState("");
-  const [statusModal, setStatusModal] = useState(false);
+  const [stageModal, setStageModal] = useState(false);
   const [priorityModal, setPriorityModal] = useState(false);
-  const [statusContent, setStatusContent] = useState(<MinusIcon />);
+  const [stageContent, setStageContent] = useState(<MinusIcon />);
   const [priorityContent, setPriorityContent] = useState(<MinusIcon />);
   const [addComment, setAddComment] = useState(false);
   const [commentText, setCommentText] = useState("");
@@ -91,7 +91,7 @@ const TaskDetail = ({ task, project, close }) => {
     { title: "High" },
   ];
 
-  const statusList = [
+  const stageList = [
     { title: "todo" },
     { title: "doing" },
     { title: "completed" },
@@ -103,11 +103,11 @@ const TaskDetail = ({ task, project, close }) => {
   const setPriority = (content) => {
     setPriorityContent((prevContent) => content);
   };
-  const toggleStatusModal = () => {
-    setStatusModal(!statusModal);
+  const toggleStageModal = () => {
+    setStageModal(!stageModal);
   };
-  const setStatus = (content) => {
-    setStatusContent((prevContent) => content);
+  const setStage = (content) => {
+    setStageContent((prevContent) => content);
   };
 
   const handleFocusAddComment = () => {
@@ -311,16 +311,14 @@ const TaskDetail = ({ task, project, close }) => {
                   ? "about-task_info_Right"
                   : "about-task_info_Right-l"
               }
-              onClick={toggleStatusModal}
+              onClick={toggleStageModal}
             >
-              {statusContent}
-              {statusModal ? (
-                <div className="modal" onMouseLeave={toggleStatusModal}>
-                  {statusList.map((el) => (
+              {stageContent}
+              {stageModal ? (
+                <div className="modal" onMouseLeave={toggleStageModal}>
+                  {stageList.map((el) => (
                     <div className="modal_elem2">
-                      <span onClick={() => setStatus(el.title)}>
-                        {el.title}
-                      </span>
+                      <span onClick={() => setStage(el.title)}>{el.title}</span>
                     </div>
                   ))}
                 </div>

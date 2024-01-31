@@ -118,12 +118,12 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
             </div>
           )}
         </div>
-        {(task.status || task.priority) && (
+        {(task.stage || task.priority) && (
           <div className="block_first">
             <div className="block_first_left">
-              {task.status ? (
+              {task.stage ? (
                 <div className={theme === "dark" ? "status-d" : "status-l"}>
-                  {task.status}
+                  {task.stage}
                 </div>
               ) : null}
               {task.priority ? (
@@ -166,7 +166,7 @@ const TaskBlock = ({ task, project, sections, onDelete }) => {
             close={closeOverlay}
             task={task}
             project={project}
-            taskStage={task.status.toLowerCase()}
+            taskStage={task.stage.toLowerCase()}
           />
         </Overlay>
       ) : null}
